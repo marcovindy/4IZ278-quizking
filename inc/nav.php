@@ -1,6 +1,6 @@
 <nav class="sidebar">
 <div class="flex-shrink-0 h-100">
-    <a href="/" class="sidebar-box-logo d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+    <a href="index.php" class="sidebar-box-logo d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
       <span class="logo-font fs-5 fw-semibold">QuizKing</span>
     </a>
     <ul class="list-unstyled ps-0">
@@ -54,16 +54,16 @@
 		</button>
         <div class="collapse" id="account-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
-            <li><a href="#" class="link-dark hyper-item rounded">Přihlásit se
+            <li><a href="login.php" class="link-dark hyper-item rounded">Přihlásit se
 			<span></span><span></span>
 			</a></li>
-            <li><a href="#" class="link-dark hyper-item rounded">Registrovat se
+            <li><a href="register.php" class="link-dark hyper-item rounded">Registrovat se
 			<span></span><span></span>
 			</a></li>
 			<li><a href="#" class="link-dark hyper-item rounded">Přehled
 			<span></span><span></span>
 			</a></li>
-            <li><a href="#" class="link-dark hyper-item rounded">Odhlásit se
+            <li><a href="logout.php" class="link-dark hyper-item rounded">Odhlásit se
 			<span></span><span></span>
 			</a></li>
           </ul>

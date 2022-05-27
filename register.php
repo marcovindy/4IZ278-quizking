@@ -29,22 +29,30 @@
     <div class="container-fluid p-0 d-flex main-container">
         <?php require_once('inc/nav.php'); ?>
         <div class="login-box">
-        <h2>Přihlášení</h2>
+        <h2>Registrace</h2>
             <form>
                 <div class="user-box">
-                <input type="text" name="" required="">
+                <input type="text" id="user_name" name="user_name" required="">
                 <label>Přihlašovací jméno</label>
                 </div>
                 <div class="user-box">
-                <input type="password" name="" required="">
+                <input type="email" id="user_email" name="user_email" required="">
+                <label>E-mail</label>
+                </div>
+                <div class="user-box">
+                <input type="password" id="user_pwd" name="user_pwd" required="">
                 <label>Heslo</label>
+                </div>
+                <div class="user-box">
+                <input type="password" id="user_pwd_co" name="user_pwd_co" required="">
+                <label>Potvrzení hesla</label>
                 </div>
                 <a href="#">
                 <span></span>
                 <span></span>
                 <span></span>
                 <span></span>
-                Přihlásit se
+                Registrovat
                 </a>
             </form>
             </div>
