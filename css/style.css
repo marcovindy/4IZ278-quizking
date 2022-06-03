@@ -347,11 +347,12 @@ a.hyper-item:hover span {
   color: #fff;
 }
 
-.sidebar button {
+.sidebar button.btn {
   color: #fff;
+  padding: 10px 30px;
 }
 
-.sidebar button::after {
+.sidebar button.btn::after {
   display: inline-block;
   margin-left: 0.255em;
   vertical-align: 0.255em;
@@ -360,6 +361,15 @@ a.hyper-item:hover span {
   border-right: 0.3em solid transparent;
   border-bottom: 0;
   border-left: 0.3em solid transparent;
+}
+
+.sidebar .collapse ul li a {
+  padding: 10px 40px;
+}
+
+.sidebar .btn:focus {
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
 }
 
 /* HEADER */

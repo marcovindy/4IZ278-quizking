@@ -14,9 +14,9 @@
     Uživatel
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <li><a class="dropdown-item" href="#">Přehled</a></li>
-    <li><a class="dropdown-item" href="#">Změnit heslo</a></li>
-    <li><a class="dropdown-item" href="#">Odhlásit</a></li>
+    <li><a class="dropdown-item" href="profile.php">Profil</a></li>
+    <li><a class="dropdown-item" href="change-password.php">Změnit heslo</a></li>
+    <li><a class="dropdown-item" href="logout.php">Odhlásit</a></li>
   </ul>
 </div>
 

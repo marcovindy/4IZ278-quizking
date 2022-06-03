@@ -37,44 +37,40 @@
 
     <?php require_once('inc/nav.php'); ?>
 
+   
+
     <div class="page-wrapper">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-8 col-sm-12">
 
-                    <div class="card bg-transit">
-                        <div class="card-header">
-                            <h2>Změna hesla</h2>
-                        </div>
-                        <div class="card-body">
-                            <form>
-                                <div class="user-box">
-                                    <input type="text" id="user_name" name="user_name" required="">
-                                    <label>Přihlašovací jméno</label>
-                                </div>
-                                <div class="user-box">
-                                    <input type="email" id="user_email" name="user_email" required="">
-                                    <label>E-mail</label>
-                                </div>
-                                <div class="user-box">
-                                    <input type="password" id="user_pwd" name="user_pwd" required="">
-                                    <label>Heslo</label>
-                                </div>
-                                <div class="user-box">
-                                    <input type="password" id="user_pwd_co" name="user_pwd_co" required="">
-                                    <label>Potvrzení hesla</label>
-                                </div>
-                                <a href="#">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    Registrovat
-                                </a>
-                            </form>
-                        </div>
+                    <div class="form-box">
+                        <h2>Změna hesla</h2>
+                        <form>
+                            <div class="item-box">
+                                <label for="user_name">Staré heslo</label>
+                                <input type="password" id="user_pwd_old" name="user_pwd_old" required="">
+
+                            </div>
+                            <div class="item-box">
+                                <label for="user_email">Nové heslo</label>
+                                <input type="password" id="user_pwd_new" name="user_pwd_new" required="">
+                            </div>
+                            <div class="item-box">
+                                <label for="user_pwd">Potvrzení nového hesla</label>
+                                <input type="password" id="user_pwd_new_co" name="user_pwd_new_co" required="">
+                            </div>
+                
+                     
+                            <a href="#">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                Změnit heslo
+                            </a>
+                        </form>
                     </div>
-
                 </div>
             </div>
         </div>

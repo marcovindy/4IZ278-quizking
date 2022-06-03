@@ -103,8 +103,9 @@ a.hyper-item {
     color: #fff;
   }
 
-  button {
+  button.btn {
     color: #fff;
+    padding: 10px 30px;
     &::after {
       display: inline-block;
       margin-left: 0.255em;
@@ -116,6 +117,14 @@ a.hyper-item {
       border-left: 0.3em solid transparent;
     }
   }
+
+  .collapse ul li a {
+    padding: 10px 40px;
+  }
+
+  .btn:focus {
+    box-shadow: none !important;
+  } 
 
   box-sizing: border-box;
   box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
@@ -139,7 +148,6 @@ header {
 
 
 /* PROFILE */
-
 .card {
   background-color: $bg-transit !important;
   color: white !important;

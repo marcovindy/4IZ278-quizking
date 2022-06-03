@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
-   
+
     <!-- Font Awesome -->
     <link href="assets/fontawesome/css/all.min.css" rel="stylesheet">
 
@@ -36,37 +36,45 @@
     <?php require_once('inc/nav.php'); ?>
 
 
-    <div class="container-fluid p-0 d-flex main-container">
-        <?php require_once('inc/nav.php'); ?>
-        <div class="form-box">
-            <h2>Registrace</h2>
-            <form>
-                <div class="item-box">
-                    <label for="user_name">Přihlašovací jméno</label>
-                    <input type="text" id="user_name" name="user_name" required="">
 
+    <div class="page-wrapper">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-8 col-sm-12">
+
+                    <div class="form-box">
+                        <h2>Registrace</h2>
+                        <form>
+                            <div class="item-box">
+                                <label for="user_name">Přihlašovací jméno</label>
+                                <input type="text" id="user_name" name="user_name" required="">
+
+                            </div>
+                            <div class="item-box">
+                                <label for="user_email">E-mail</label>
+                                <input type="email" id="user_email" name="user_email" required="">
+                            </div>
+                            <div class="item-box">
+                                <label for="user_pwd">Heslo</label>
+                                <input type="password" id="user_pwd" name="user_pwd" required="">
+                            </div>
+                            <div class="item-box">
+                                <label for="user_pwd_co">Potvrzení hesla</label>
+                                <input type="password" id="user_pwd_co" name="user_pwd_co" required="">
+                            </div>
+                            <a href="#">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                Registrovat
+                            </a>
+                        </form>
+                    </div>
                 </div>
-                <div class="item-box">
-                    <label for="user_email">E-mail</label>
-                    <input type="email" id="user_email" name="user_email" required="">
-                </div>
-                <div class="item-box">
-                    <label for="user_pwd">Heslo</label>
-                    <input type="password" id="user_pwd" name="user_pwd" required="">
-                </div>
-                <div class="item-box">
-                    <label for="user_pwd_co">Potvrzení hesla</label>
-                    <input type="password" id="user_pwd_co" name="user_pwd_co" required="">
-                </div>
-                <a href="#">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    Registrovat
-                </a>
-            </form>
+            </div>
         </div>
     </div>
 </body>
+
 </html>

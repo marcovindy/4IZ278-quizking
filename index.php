@@ -36,18 +36,23 @@
 
     <div class="page-wrapper">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-8">
-                    a
+            <div class="card">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 col-sm-12">
+                        <h1>Kvízy</h1>
+                    </div>
                 </div>
-                <div class="col-4">
-                    b
+                <div class="row">
+                    <div class="col">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 col-sm-12">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-
 </body>
 
 </html>
