@@ -1,4 +1,3 @@
-/* IMPORT */
 /* LOGIN */
 .login-box {
   width: 400px;
@@ -99,7 +98,8 @@
   0% {
     left: -100%;
   }
-  50%, 100% {
+  50%,
+  100% {
     left: 100%;
   }
 }
@@ -108,7 +108,8 @@
   0% {
     left: -100%;
   }
-  50%, 100% {
+  50%,
+  100% {
     left: 100%;
   }
 }
@@ -130,7 +131,8 @@
   0% {
     top: -100%;
   }
-  50%, 100% {
+  50%,
+  100% {
     top: 100%;
   }
 }
@@ -139,7 +141,8 @@
   0% {
     top: -100%;
   }
-  50%, 100% {
+  50%,
+  100% {
     top: 100%;
   }
 }
@@ -161,7 +164,8 @@
   0% {
     right: -100%;
   }
-  50%, 100% {
+  50%,
+  100% {
     right: 100%;
   }
 }
@@ -170,7 +174,8 @@
   0% {
     right: -100%;
   }
-  50%, 100% {
+  50%,
+  100% {
     right: 100%;
   }
 }
@@ -192,7 +197,8 @@
   0% {
     bottom: -100%;
   }
-  50%, 100% {
+  50%,
+  100% {
     bottom: 100%;
   }
 }
@@ -201,99 +207,9 @@
   0% {
     bottom: -100%;
   }
-  50%, 100% {
+  50%,
+  100% {
     bottom: 100%;
   }
 }
-
-html {
-  height: 100%;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-  background: -webkit-gradient(linear, left top, left bottom, from(#1d2b44), to(#284361));
-  background: linear-gradient(#1d2b44, #284361);
-  min-height: 100vh;
-}
-
-.main-container {
-  height: 100%;
-  min-height: 100vh;
-}
-
-.logo-font {
-  font-family: 'Oleo Script Swash Caps', cursive;
-  font-size: 1.5rem;
-}
-
-a, button {
-  text-decoration: none !important;
-}
-
-a:hover, button:hover {
-  color: #fff !important;
-}
-
-a.hyper-item {
-  position: relative;
-  overflow: hidden;
-}
-
-a.hyper-item span {
-  position: absolute;
-  display: block;
-  bottom: 0;
-  left: -100%;
-  width: 100%;
-  height: 2px;
-  background: #03e9f4;
-  -webkit-transition: 0.35s;
-  transition: 0.35s;
-}
-
-a.hyper-item:hover {
-  color: white;
-}
-
-a.hyper-item:hover span {
-  left: 0;
-}
-
-/* SIDEBAR */
-.sidebar {
-  min-width: 200px;
-  min-height: 100vh;
-  display: block;
-  background: rgba(0, 0, 0, 0.5);
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  -webkit-box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
-          box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
-}
-
-.sidebar-box-logo {
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-.sidebar a {
-  display: block;
-  padding: 10px 30px;
-  color: white;
-}
-
-.sidebar button {
-  color: white;
-}
-
-/* HEADER */
-header .container .row {
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: end;
-}
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=import.css.map */
