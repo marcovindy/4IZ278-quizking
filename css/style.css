@@ -1,6 +1,7 @@
+@charset "UTF-8";
 /* IMPORT */
 /* LOGIN */
-.login-box {
+.form-box {
   width: 400px;
   padding: 40px;
   background: rgba(0, 0, 0, 0.5);
@@ -13,20 +14,20 @@
   margin: auto;
 }
 
-.login-box h2 {
+.form-box h2 {
   margin: 0 0 30px;
   padding: 0;
   color: #fff;
   text-align: center;
 }
 
-.login-box .user-box {
+.form-box .item-box {
   position: relative;
 }
 
-.login-box .user-box input {
+.form-box .item-box input {
   width: 100%;
-  padding: 10px 0;
+  padding: 8px 0;
   font-size: 16px;
   color: #fff;
   margin-bottom: 30px;
@@ -36,27 +37,16 @@
   background: transparent;
 }
 
-.login-box .user-box label {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 10px 0;
-  font-size: 16px;
+.form-box .item-box label {
+  font-size: 13px;
   color: #fff;
+  padding: 0;
   pointer-events: none;
   -webkit-transition: .5s;
   transition: .5s;
 }
 
-.login-box .user-box input:focus ~ label,
-.login-box .user-box input:valid ~ label {
-  top: -20px;
-  left: 0;
-  color: #03e9f4;
-  font-size: 12px;
-}
-
-.login-box form a {
+.form-box form a {
   position: relative;
   display: inline-block;
   padding: 10px 20px;
@@ -71,7 +61,7 @@
   letter-spacing: 4px;
 }
 
-.login-box a:hover {
+.form-box a:hover {
   background: #03e9f4;
   color: #fff;
   border-radius: 5px;
@@ -79,12 +69,12 @@
           box-shadow: 0 0 20px #03e9f4;
 }
 
-.login-box a span {
+.form-box a span {
   position: absolute;
   display: block;
 }
 
-.login-box a span:nth-child(1) {
+.form-box a span:nth-child(1) {
   top: 0;
   left: -100%;
   width: 100%;
@@ -115,7 +105,7 @@
   }
 }
 
-.login-box a span:nth-child(2) {
+.form-box a span:nth-child(2) {
   top: -100%;
   right: 0;
   width: 2px;
@@ -148,7 +138,7 @@
   }
 }
 
-.login-box a span:nth-child(3) {
+.form-box a span:nth-child(3) {
   bottom: 0;
   right: -100%;
   width: 100%;
@@ -181,7 +171,7 @@
   }
 }
 
-.login-box a span:nth-child(4) {
+.form-box a span:nth-child(4) {
   bottom: -100%;
   left: 0;
   width: 2px;
@@ -212,6 +202,14 @@
   100% {
     bottom: 100%;
   }
+}
+
+/* Změna Autocomplete stylů*/
+input:-webkit-autofill {
+  -webkit-text-fill-color: white;
+  -webkit-box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0) inset;
+  -webkit-transition: background-color 5000s ease-in-out 0s;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 header {
@@ -258,6 +256,10 @@ body {
   min-height: 100vh;
 }
 
+.container-fluid {
+  padding: 2rem;
+}
+
 .main-container {
   height: 100%;
   min-height: 100vh;
@@ -268,21 +270,26 @@ body {
   font-size: 1.5rem;
 }
 
+.fs-1 {
+  font-size: 6rem;
+}
+
+.fs-3 {
+  font-size: 3rem;
+}
+
+.bg-transit {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  color: white;
+}
+
+.btn-blue {
+  background-color: #03e9f4 !important;
+}
+
 a,
 button {
   text-decoration: none !important;
-}
-
-a.btn::after,
-button.btn::after {
-  display: inline-block;
-  margin-left: 0.255em;
-  vertical-align: 0.255em;
-  content: "";
-  border-top: 0.3em solid;
-  border-right: 0.3em solid transparent;
-  border-bottom: 0;
-  border-left: 0.3em solid transparent;
 }
 
 a:hover,
@@ -344,6 +351,17 @@ a.hyper-item:hover span {
   color: #fff;
 }
 
+.sidebar button::after {
+  display: inline-block;
+  margin-left: 0.255em;
+  vertical-align: 0.255em;
+  content: "";
+  border-top: 0.3em solid;
+  border-right: 0.3em solid transparent;
+  border-bottom: 0;
+  border-left: 0.3em solid transparent;
+}
+
 /* HEADER */
 header .container .row {
   -webkit-box-pack: end;
@@ -355,5 +373,31 @@ header .container .row {
 .page-wrapper {
   margin-left: 200px;
   position: relative;
+}
+
+/* PROFILE */
+.card {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  color: white !important;
+}
+
+.card .btn-blue i {
+  color: rgba(0, 0, 0, 0.8) !important;
+}
+
+.card .btn-blue.fb:hover {
+  background-color: #3e58ca !important;
+}
+
+.card .btn-blue.fb:hover i {
+  color: white !important;
+}
+
+.card .btn-blue.ig:hover {
+  background-color: #b643d9 !important;
+}
+
+.card .btn-blue.ig:hover i {
+  color: white !important;
 }
 /*# sourceMappingURL=style.css.map */

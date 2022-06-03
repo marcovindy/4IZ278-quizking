@@ -32,8 +32,9 @@
         <h2>Přihlášení</h2>
             <form>
                 <div class="user-box">
+                <label for="u_name">Přihlašovací jméno</label>
                 <input type="text" name="" required="">
-                <label>Přihlašovací jméno</label>
+               
                 </div>
                 <div class="user-box">
                 <input type="password" name="" required="">
