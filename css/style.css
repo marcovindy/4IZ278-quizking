@@ -99,7 +99,8 @@
   0% {
     left: -100%;
   }
-  50%, 100% {
+  50%,
+  100% {
     left: 100%;
   }
 }
@@ -108,7 +109,8 @@
   0% {
     left: -100%;
   }
-  50%, 100% {
+  50%,
+  100% {
     left: 100%;
   }
 }
@@ -130,7 +132,8 @@
   0% {
     top: -100%;
   }
-  50%, 100% {
+  50%,
+  100% {
     top: 100%;
   }
 }
@@ -139,7 +142,8 @@
   0% {
     top: -100%;
   }
-  50%, 100% {
+  50%,
+  100% {
     top: 100%;
   }
 }
@@ -161,7 +165,8 @@
   0% {
     right: -100%;
   }
-  50%, 100% {
+  50%,
+  100% {
     right: 100%;
   }
 }
@@ -170,7 +175,8 @@
   0% {
     right: -100%;
   }
-  50%, 100% {
+  50%,
+  100% {
     right: 100%;
   }
 }
@@ -192,7 +198,8 @@
   0% {
     bottom: -100%;
   }
-  50%, 100% {
+  50%,
+  100% {
     bottom: 100%;
   }
 }
@@ -201,9 +208,41 @@
   0% {
     bottom: -100%;
   }
-  50%, 100% {
+  50%,
+  100% {
     bottom: 100%;
   }
+}
+
+header {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.nav-dropdown {
+  position: absolute;
+  display: none;
+  z-index: 1;
+  -webkit-box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+}
+
+.logo-bar {
+  min-width: 168px;
+  text-align: center;
+}
+
+.dropdown-menu {
+  left: -60px !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.dropdown-menu a {
+  color: white;
+}
+
+.dropdown-menu a:hover {
+  background: none;
+  color: #03e9f4 !important;
 }
 
 html {
@@ -229,11 +268,25 @@ body {
   font-size: 1.5rem;
 }
 
-a, button {
+a,
+button {
   text-decoration: none !important;
 }
 
-a:hover, button:hover {
+a.btn::after,
+button.btn::after {
+  display: inline-block;
+  margin-left: 0.255em;
+  vertical-align: 0.255em;
+  content: "";
+  border-top: 0.3em solid;
+  border-right: 0.3em solid transparent;
+  border-bottom: 0;
+  border-left: 0.3em solid transparent;
+}
+
+a:hover,
+button:hover {
   color: #fff !important;
 }
 
@@ -255,7 +308,7 @@ a.hyper-item span {
 }
 
 a.hyper-item:hover {
-  color: white;
+  color: #fff;
 }
 
 a.hyper-item:hover span {
@@ -264,10 +317,11 @@ a.hyper-item:hover span {
 
 /* SIDEBAR */
 .sidebar {
-  min-width: 200px;
+  width: 200px;
   min-height: 100vh;
   display: block;
   background: rgba(0, 0, 0, 0.5);
+  position: absolute;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   -webkit-box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
@@ -283,11 +337,11 @@ a.hyper-item:hover span {
 .sidebar a {
   display: block;
   padding: 10px 30px;
-  color: white;
+  color: #fff;
 }
 
 .sidebar button {
-  color: white;
+  color: #fff;
 }
 
 /* HEADER */
@@ -295,5 +349,11 @@ header .container .row {
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: end;
+}
+
+/* PAGE WRAPPER */
+.page-wrapper {
+  margin-left: 200px;
+  position: relative;
 }
 /*# sourceMappingURL=style.css.map */

@@ -1,0 +1,30 @@
+
+
+header {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.nav-dropdown {
+    position: absolute;
+    display: none;
+    z-index: 1;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .logo-bar {
+    min-width: 168px;
+    text-align: center;
+
+  }
+
+  .dropdown-menu {
+      left: -60px !important;
+      background-color: $bg-transit !important;
+      a {
+          color: white;
+          &:hover {
+              background: none;
+              color: $base-color-blue !important;
+          }
+      }
+  }

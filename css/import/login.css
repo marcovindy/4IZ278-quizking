@@ -1,3 +1,4 @@
+/* IMPORT */
 /* LOGIN */
 .login-box {
   width: 400px;
@@ -51,7 +52,7 @@
 .login-box .user-box input:valid ~ label {
   top: -20px;
   left: 0;
-  color: #03e9f4;
+  color: #000000;
   font-size: 12px;
 }
 
@@ -59,7 +60,7 @@
   position: relative;
   display: inline-block;
   padding: 10px 20px;
-  color: #03e9f4;
+  color: #000000;
   font-size: 16px;
   text-decoration: none;
   text-transform: uppercase;
@@ -71,11 +72,11 @@
 }
 
 .login-box a:hover {
-  background: #03e9f4;
+  background: #000000;
   color: #fff;
   border-radius: 5px;
-  -webkit-box-shadow: 0 0 20px #03e9f4;
-          box-shadow: 0 0 20px #03e9f4;
+  -webkit-box-shadow: 0 0 20px #000000;
+          box-shadow: 0 0 20px #000000;
 }
 
 .login-box a span {
@@ -88,8 +89,8 @@
   left: -100%;
   width: 100%;
   height: 2px;
-  background: -webkit-gradient(linear, left top, right top, from(transparent), to(#03e9f4));
-  background: linear-gradient(90deg, transparent, #03e9f4);
+  background: -webkit-gradient(linear, left top, right top, from(transparent), to(#000000));
+  background: linear-gradient(90deg, transparent, #000000);
   -webkit-animation: btn-anim1 2s linear infinite;
           animation: btn-anim1 2s linear infinite;
 }
@@ -119,8 +120,8 @@
   right: 0;
   width: 2px;
   height: 100%;
-  background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(#03e9f4));
-  background: linear-gradient(180deg, transparent, #03e9f4);
+  background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(#000000));
+  background: linear-gradient(180deg, transparent, #000000);
   -webkit-animation: btn-anim2 2s linear infinite;
           animation: btn-anim2 2s linear infinite;
   -webkit-animation-delay: 0.5s;
@@ -152,8 +153,8 @@
   right: -100%;
   width: 100%;
   height: 2px;
-  background: -webkit-gradient(linear, right top, left top, from(transparent), to(#03e9f4));
-  background: linear-gradient(270deg, transparent, #03e9f4);
+  background: -webkit-gradient(linear, right top, left top, from(transparent), to(#000000));
+  background: linear-gradient(270deg, transparent, #000000);
   -webkit-animation: btn-anim3 2s linear infinite;
           animation: btn-anim3 2s linear infinite;
   -webkit-animation-delay: 1s;
@@ -185,8 +186,8 @@
   left: 0;
   width: 2px;
   height: 100%;
-  background: -webkit-gradient(linear, left bottom, left top, from(transparent), to(#03e9f4));
-  background: linear-gradient(360deg, transparent, #03e9f4);
+  background: -webkit-gradient(linear, left bottom, left top, from(transparent), to(#000000));
+  background: linear-gradient(360deg, transparent, #000000);
   -webkit-animation: btn-anim4 2s linear infinite;
           animation: btn-anim4 2s linear infinite;
   -webkit-animation-delay: 1.5s;

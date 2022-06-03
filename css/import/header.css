@@ -1,0 +1,21 @@
+header {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.nav-dropdown {
+  position: absolute;
+  display: none;
+  z-index: 1;
+  -webkit-box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+}
+
+.logo-bar {
+  min-width: 168px;
+  text-align: center;
+}
+
+.dropdown-menu {
+  left: -60px;
+}
+/*# sourceMappingURL=header.css.map */
