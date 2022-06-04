@@ -9,28 +9,6 @@ $categories = $query->fetchAll(PDO::FETCH_ASSOC);
 $numOfCat = 0;
 ?>
 
-<?php
-if (!isset($_GET['categories'])) {
-
-    $query = $db->query("SELECT quizzes.* FROM quizzes ORDER BY quizzes.quiz_created DESC");
-    $quizzes = $query->fetchAll(PDO::FETCH_ASSOC);
-} elseif (isset($_GET['categories'])) {
-    $query = 'SELECT
-                           quizzes.* 
-                           FROM quizzes JOIN categories ON quizzes.quiz_category_id=categories.category_id WHERE ';
-    $names = $_GET['categories'];
-    $temp = 0;
-    for ($i = 0; $i < count($names) - 1; $i++) {
-        $query .= 'categories.category_name="' . $names[$i] . '" OR ';
-        $temp = $i + 1;
-    }
-    $query .= 'categories.category_name="' . $names[$temp++] . '" ';
-    $query .= ' ORDER BY quizzes.quiz_created DESC;';
-    $query = $db->query($query);
-    $quizzes = $query->fetchAll(PDO::FETCH_ASSOC);
-}
-
-?>
 
 
 
@@ -38,7 +16,7 @@ if (!isset($_GET['categories'])) {
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="description" content="Rezbar">
     <meta name="keywords" content="Rezbar, woodcurving, woodstatutes, wood, drevo, sochy, dekorace, motorovapila, motorovka">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -73,6 +51,34 @@ if (!isset($_GET['categories'])) {
 
     <?php require_once('inc/nav.php'); ?>
 
+    <?php
+    if (!empty($_SESSION)) {
+        $user = $_SESSION['user_id'];
+    } else {
+        $user = -1;
+    }
+    if (!isset($_GET['categories'])) {
+        $query = $db->query('SELECT quizzes.* FROM quizzes WHERE quizzes.quiz_user_id="' . $user . '" ORDER BY quizzes.quiz_created DESC');
+        $quizzes = $query->fetchAll(PDO::FETCH_ASSOC);
+    } elseif (isset($_GET['categories'])) {
+        $query = 'SELECT
+                           quizzes.* 
+                           FROM quizzes JOIN categories ON quizzes.quiz_category_id=categories.category_id WHERE ';
+        $names = $_GET['categories'];
+        $temp = 0;
+        for ($i = 0; $i < count($names) - 1; $i++) {
+            $query .= 'categories.category_name="' . $names[$i] . '" OR ';
+            $temp = $i + 1;
+        }
+        $query .= 'categories.category_name="' . $names[$temp++] . '" ';
+        $query .= ' AND quizzes.quiz_user_id=' . $user;
+        $query .= ' ORDER BY quizzes.quiz_created DESC;';
+        $query = $db->query($query);
+        $quizzes = $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    ?>
+
     <div class="page-wrapper">
         <div class="container-fluid">
             <div class="card p-4">
@@ -96,11 +102,10 @@ if (!isset($_GET['categories'])) {
                             echo $text;
                         }
                         ?>
-
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <div class="filter-box">
-                            <form class="d-flex" action="index.php" method="get">
+                            <form class="d-flex" action="custom-quiz.php" method="get">
                                 <fieldset>
                                     <legend>Filtrovat kategorie</legend>
                                     <div class="d-flex">
@@ -113,7 +118,7 @@ if (!isset($_GET['categories'])) {
                                                 </label>
                                             <?php endforeach; ?>
                                         <?php endif; ?>
-                                        </div>
+                                    </div>
                                 </fieldset>
                                 <fieldset>
                                     <button class="btn-transit btn" type="submit">Filter</button>
@@ -124,6 +129,8 @@ if (!isset($_GET['categories'])) {
                         </div>
                     </div>
                 </div>
+
+
                 <div class="row">
                     <div class="col">
                         <?php if (!empty($quizzes)) : ?>
@@ -148,14 +155,23 @@ if (!isset($_GET['categories'])) {
                             <?php endforeach; ?>
                         <?php endif; ?>
                         <?php if (empty($quizzes)) : ?>
-                            <h2>Zde bohužel nejsou žádné kvízy</h2>
+                            <?php if ($user != -1) : ?>
+                                <h2>Zde bohužel nejsou žádné kvízy</h2>
+                            <?php else : ?>
+                                <h2>Pro vytvoření vlastního kvízu se prosím <a href="login.php">přihlašte</a></h2>
+                            <?php endif; ?>
                         <?php endif; ?>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-8 col-md-8 col-sm-12">
+                <?php if (!empty($_SESSION)) : ?>
+                <div class="row pt-4">
+                    <div class="m-auto col-lg-3 col-sm-12">
+                        <a href="#" class="btn btn-circle btn-transit w-100">
+                            Vytvořit kvíz
+                        </a>
                     </div>
                 </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>

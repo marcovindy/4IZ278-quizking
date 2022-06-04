@@ -44,6 +44,33 @@ body {
   background-color: $base-color-blue !important;
 }
 
+.btn-transit {
+  background-color: transparent !important;
+  border: 1px solid $base-color-blue !important;
+  color: $base-color-blue !important;
+  &:hover {
+    background: $base-color-blue !important;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 20px $base-color-blue;
+  }
+}
+
+.btn-transit2 {
+  background-color: transparent !important;
+  border: 1px solid white !important;
+  color: white !important;
+  &:hover {
+    box-shadow: 0 0 20px red;
+  }
+}
+
+.card {
+  .row {
+    padding: 1rem 0 !important;
+  }
+}
+
 a,
 button {
   text-decoration: none !important;
@@ -151,6 +178,7 @@ header {
 .card {
   background-color: $bg-transit !important;
   color: white !important;
+
   .btn-blue {
     i {
       color: rgba(0, 0, 0, 0.8) !important;
@@ -167,5 +195,23 @@ header {
         color: rgb(255, 255, 255) !important;
       }
     }
+  }
+}
+
+
+/* QUIZZES */
+.quiz {
+  transition: .5s;
+  color: white;
+  &:hover {
+    background-color: $base-color-blue;
+    color: $bg-transit;
+  }
+}
+
+/* FILTER */
+.filter-box {
+  form {
+    justify-content: space-between;
   }
 }

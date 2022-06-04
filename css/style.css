@@ -46,7 +46,7 @@
   transition: .5s;
 }
 
-.form-box form a {
+.form-box form button {
   position: relative;
   display: inline-block;
   padding: 10px 20px;
@@ -59,22 +59,25 @@
   transition: .5s;
   margin-top: 40px;
   letter-spacing: 4px;
+  background-color: transparent !important;
+  border: 0 !important;
 }
 
-.form-box a:hover {
-  background: #03e9f4;
+.form-box button:hover {
+  background: #03e9f4 !important;
+  border: 0 !important;
   color: #fff;
   border-radius: 5px;
   -webkit-box-shadow: 0 0 20px #03e9f4;
           box-shadow: 0 0 20px #03e9f4;
 }
 
-.form-box a span {
+.form-box button span {
   position: absolute;
   display: block;
 }
 
-.form-box a span:nth-child(1) {
+.form-box button span:nth-child(1) {
   top: 0;
   left: -100%;
   width: 100%;
@@ -105,7 +108,7 @@
   }
 }
 
-.form-box a span:nth-child(2) {
+.form-box button span:nth-child(2) {
   top: -100%;
   right: 0;
   width: 2px;
@@ -138,7 +141,7 @@
   }
 }
 
-.form-box a span:nth-child(3) {
+.form-box button span:nth-child(3) {
   bottom: 0;
   right: -100%;
   width: 100%;
@@ -171,7 +174,7 @@
   }
 }
 
-.form-box a span:nth-child(4) {
+.form-box button span:nth-child(4) {
   bottom: -100%;
   left: 0;
   width: 2px;
@@ -204,7 +207,7 @@
   }
 }
 
-/* Změna Autocomplete stylů*/
+/* Změnbutton Autocomplete stylů*/
 input:-webkit-autofill {
   -webkit-text-fill-color: white;
   -webkit-box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0) inset;
@@ -285,6 +288,35 @@ body {
 
 .btn-blue {
   background-color: #03e9f4 !important;
+}
+
+.btn-transit {
+  background-color: transparent !important;
+  border: 1px solid #03e9f4 !important;
+  color: #03e9f4 !important;
+}
+
+.btn-transit:hover {
+  background: #03e9f4 !important;
+  color: #fff;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 20px #03e9f4;
+          box-shadow: 0 0 20px #03e9f4;
+}
+
+.btn-transit2 {
+  background-color: transparent !important;
+  border: 1px solid white !important;
+  color: white !important;
+}
+
+.btn-transit2:hover {
+  -webkit-box-shadow: 0 0 20px red;
+          box-shadow: 0 0 20px red;
+}
+
+.card .row {
+  padding: 1rem 0 !important;
 }
 
 a,
@@ -409,5 +441,24 @@ header .container .row {
 
 .card .btn-blue.ig:hover i {
   color: white !important;
+}
+
+/* QUIZZES */
+.quiz {
+  -webkit-transition: .5s;
+  transition: .5s;
+  color: white;
+}
+
+.quiz:hover {
+  background-color: #03e9f4;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* FILTER */
+.filter-box form {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 /*# sourceMappingURL=style.css.map */

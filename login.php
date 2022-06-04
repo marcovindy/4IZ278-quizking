@@ -97,13 +97,13 @@ if (!empty($_POST)) {
                                 <label for="user_pwd">Heslo</label>
                                 <input type="password" name="user_pwd" id="user_pwd" name="user_pwd" required="">
                             </div>
-                            <input type="submit" id="submit">
+                            <button type="submit" id="submit">     Přihlásit se
                             <span></span>
                             <span></span>
                             <span></span>
                             <span></span>
-                            Přihlásit se
-                            </a>
+                            </button>
+                    
                         </form>
                     </div>
                 </div>
