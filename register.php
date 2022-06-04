@@ -1,3 +1,21 @@
+<?php
+  //načteme připojení k databázi a inicializujeme session
+  require_once 'inc/user.php';
+
+  if (!empty($_SESSION['user_id'])){
+    //uživatel už je přihlášený, nemá smysl, aby se registroval
+    header('Location: index.php');
+    exit();
+  }
+
+
+
+  //vložíme do stránek patičku
+  $pageTitle='Registrace nového uživatele';
+  include 'inc/header.php';
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,7 +62,7 @@
 
                     <div class="form-box">
                         <h2>Registrace</h2>
-                        <form>
+                        <form method="POST" action="php/signup.php">
                             <div class="item-box">
                                 <label for="user_name">Přihlašovací jméno</label>
                                 <input type="text" id="user_name" name="user_name" required="">
@@ -62,7 +80,7 @@
                                 <label for="user_pwd_co">Potvrzení hesla</label>
                                 <input type="password" id="user_pwd_co" name="user_pwd_co" required="">
                             </div>
-                            <a href="#">
+                            <input type="submit" id="submit">
                                 <span></span>
                                 <span></span>
                                 <span></span>
