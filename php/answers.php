@@ -1,9 +1,9 @@
 <?php
 class Answer
 {
-    private $id;
-    private $answer;
-    private $correct;
+    public $id;
+    public $answer;
+    public $correct;
     const BR = '<br />';
 
     public function __construct($id, $answer, $correct)
