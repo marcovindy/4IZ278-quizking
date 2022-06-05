@@ -38,7 +38,7 @@ if (!isset($_GET['categories'])) {
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="description" content="Rezbar">
     <meta name="keywords" content="Rezbar, woodcurving, woodstatutes, wood, drevo, sochy, dekorace, motorovapila, motorovka">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -113,7 +113,7 @@ if (!isset($_GET['categories'])) {
                                                 </label>
                                             <?php endforeach; ?>
                                         <?php endif; ?>
-                                        </div>
+                                    </div>
                                 </fieldset>
                                 <fieldset>
                                     <button class="btn-transit btn" type="submit">Filter</button>
@@ -129,7 +129,7 @@ if (!isset($_GET['categories'])) {
                         <?php if (!empty($quizzes)) : ?>
                             <?php foreach ($quizzes as $quiz) : array_map('htmlentities', $quiz); ?>
                                 <?php $numOfCat = count($quizzes); ?>
-                                <a href="">
+                                <a href="php/test.php?quiz_id=<?= $quiz['quiz_id'] ?>">
                                     <div class="quiz p-3">
                                         <div class="row">
                                             <div class="col-8">

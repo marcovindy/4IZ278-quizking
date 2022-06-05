@@ -66,6 +66,17 @@ body {
   }
 }
 
+.btn-transit3 {
+  background-color: transparent !important;
+  border: 1px solid $base-color-yellow !important;
+  color: $txt-color-main !important;
+  &:hover {
+    box-shadow: 0 0 20px $base-color-yellow;
+    background-color: $base-color-yellow !important;
+    color: $txt-color-main !important;
+  }
+}
+
 .card {
   .row {
     padding: 1rem 0 !important;
@@ -202,7 +213,7 @@ header {
   transition: .5s;
   color:  $txt-color-main;
   &:hover {
-    background-color: $base-color-blue;
+    box-shadow: 0px 0px 12px 1px $base-color-blue;
     color:  $txt-color-main;
   }
 }

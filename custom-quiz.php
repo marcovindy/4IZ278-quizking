@@ -139,15 +139,29 @@ $numOfCat = 0;
                                 <a href="">
                                     <div class="quiz p-3">
                                         <div class="row">
-                                            <div class="col-8">
+                                            <div class="col-5 d-flex flex-column justify-content-center">
                                                 <span class="m-0">
                                                     <?= htmlspecialchars($quiz['quiz_title']); ?>
                                                 </span>
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-4  d-flex  flex-column justify-content-center">
                                                 <span class="m-0">
                                                     <?= htmlspecialchars($quiz['quiz_created']); ?>
                                                 </span>
+                                            </div>
+                                            <div class="col-3 d-flex">
+                                                <div class="col-lg-6 col-sm-6">
+                                                <form action="custom-edit.php" method="post">
+                                                    <input type="hidden" id="quiz_id" name="quiz_id" value="<?= $post['quiz_id']; ?>">
+                                                    <button class="btn-transit3 btn" type="submit">Upravit</button>
+                                                </form>
+                                                </div>
+                                                <div class="col-lg-6 col-sm-6">
+                                                <button class="btn-transit2 btn" type="reset">Smazat</button>
+
+                                                </div>
+                                              
+                                              
                                             </div>
                                         </div>
                                     </div>
@@ -164,13 +178,13 @@ $numOfCat = 0;
                     </div>
                 </div>
                 <?php if (!empty($_SESSION)) : ?>
-                <div class="row pt-4">
-                    <div class="m-auto col-lg-3 col-sm-12">
-                        <a href="#" class="btn btn-circle btn-transit w-100">
-                            Vytvořit kvíz
-                        </a>
+                    <div class="row pt-4">
+                        <div class="m-auto col-lg-3 col-sm-12">
+                            <a href="#" class="btn btn-circle btn-transit w-100">
+                                Vytvořit kvíz
+                            </a>
+                        </div>
                     </div>
-                </div>
                 <?php endif; ?>
             </div>
         </div>
