@@ -188,7 +188,7 @@ header {
 .card {
   background-color: $bg-transit !important;
   color:  $txt-color-main !important;
-  overflow-x: scroll;
+  overflow-x: hidden;
   max-height: 80vh;
 
   .btn-blue {

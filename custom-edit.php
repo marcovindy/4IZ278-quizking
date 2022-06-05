@@ -20,7 +20,19 @@ if (!empty($_POST)) {
     }
 }
 
+
+
+$query = 'SELECT
+                       questions.*
+                       FROM questions  WHERE questions.question_id="'.$_POST['quiz_id'].'" ;';
+$query = $db->query($query);
+$questions = $query->fetchAll(PDO::FETCH_ASSOC);
+
+
 ?>
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -61,6 +73,8 @@ if (!empty($_POST)) {
 
     <?php require_once('inc/nav.php'); ?>
 
+  
+
     <div class="page-wrapper">
         <div class="container-fluid">
             <div class="row justify-content-center">
@@ -94,9 +108,38 @@ if (!empty($_POST)) {
                                 <span></span>
                                 <span></span>
                                 <span></span>
-                                Vytvořit kvíz
+                                Upravit
                             </button>
                         </form>
+                        <h2 class="mt-4">Otázky</h2>
+                        <div class="d-flex justify-content-center">
+
+                        <a  class="btn btn-transit mb-4" href="custom-question-create.php?quiz_id=<?=$_POST['quiz_id'];?>">Vytvořit novou</a>
+                        </div>
+                        <?php if (!empty($questions)) : ?>
+                            <?php foreach ($questions as $q) : array_map('htmlentities', $q); ?>
+                            <p>Otázka: <?= $q['question_question']; ?></p>
+                                <?php if (!empty($questions)) : ?>
+                                    <?php
+                                        $query = 'SELECT
+                                        answers.* 
+                                        FROM answers JOIN questions ON answers.question_id=questions.question_id WHERE answers.question_id="'.$_POST['quiz_id'].'" ;';
+                                          $query = $db->query($query);
+                                         $answers = $query->fetchAll(PDO::FETCH_ASSOC);
+                                        ?>
+                                        <?php foreach ($answers as $a) : array_map('htmlentities', $a); ?>
+                                        <p>Odpověď: <?= $a['answer_answer']; ?>  
+                                        <?php if ($a['answer_correct'] == 1) : ?>
+                                        Správně
+                                        <?php else: ?>
+                                        Špatně
+                                        <?php endif; ?>
+                                    </p>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+
                     </div>
                 </div>
             </div>
