@@ -40,7 +40,8 @@
             }
             header("location: ../quiz.php");
         } else {
-            header("location: ../index.php");
+            file_put_contents("../json/data.json", "null");
+            header("location: ../quiz.php");
         }
     } else {
         header("location: ../index.php");

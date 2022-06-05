@@ -440,6 +440,8 @@ header .container .row {
 .card {
   background-color: white !important;
   color: black !important;
+  overflow-x: scroll;
+  max-height: 80vh;
 }
 
 .card .btn-blue i {

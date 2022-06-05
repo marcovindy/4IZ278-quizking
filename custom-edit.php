@@ -63,15 +63,41 @@ if (!empty($_POST)) {
 
     <div class="page-wrapper">
         <div class="container-fluid">
-            <div class="card p-4">
-                <div class="row">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-8 col-sm-12">
 
-                    <form method="post">
-
-
-                        <button type="submit" class="btn btn-primary">uložit...</button>
-                        <a href="index.php" class="btn btn-light">zrušit</a>
-                    </form>
+                    <div class="form-box">
+                        <h1>Upravit kvíz</h1>
+                        <form method="POST" action="php/edit-quiz.php">
+                            <div class="item-box">
+                                <label for="quiz_title">Název kvízu</label>
+                                <input type="text" id="quiz_title" name="quiz_title" required="">
+                            </div>
+                            <div class="item-box">
+                                <label for="category">Kategorie:</label>
+                                <select name="category" id="category" required class="form-control <?php echo (!empty($errors['category']) ? 'is-invalid' : ''); ?>">
+                                    <option value="">--Vyberte--</option>
+                                    <?php
+                                    $categoryQuery = $db->prepare('SELECT * FROM categories ORDER BY category_name;');
+                                    $categoryQuery->execute();
+                                    $categories = $categoryQuery->fetchAll(PDO::FETCH_ASSOC);
+                                    if (!empty($categories)) {
+                                        foreach ($categories as $category) {
+                                            echo '<option value="' . $category['category_id'] . '">' . htmlspecialchars($category['category_name']) . '</option>';
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <button type="submit" id="submit">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                Vytvořit kvíz
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

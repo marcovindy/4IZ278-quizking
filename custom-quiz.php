@@ -136,10 +136,10 @@ $numOfCat = 0;
                         <?php if (!empty($quizzes)) : ?>
                             <?php foreach ($quizzes as $quiz) : array_map('htmlentities', $quiz); ?>
                                 <?php $numOfCat = count($quizzes); ?>
-                                <a href="">
+                                <a href="php/json.php?quiz_id=<?= $quiz['quiz_id'] ?>">
                                     <div class="quiz p-3">
                                         <div class="row">
-                                            <div class="col-5 d-flex flex-column justify-content-center">
+                                            <div class="col-4 d-flex flex-column justify-content-center">
                                                 <span class="m-0">
                                                     <?= htmlspecialchars($quiz['quiz_title']); ?>
                                                 </span>
@@ -149,19 +149,15 @@ $numOfCat = 0;
                                                     <?= htmlspecialchars($quiz['quiz_created']); ?>
                                                 </span>
                                             </div>
-                                            <div class="col-3 d-flex">
-                                                <div class="col-lg-6 col-sm-6">
-                                                <form action="custom-edit.php" method="post">
-                                                    <input type="hidden" id="quiz_id" name="quiz_id" value="<?= $post['quiz_id']; ?>">
+                                            <div class="col-4 d-flex justify-content-center">
+                                                <form class="pr-2" action="custom-edit.php" method="post">
+                                                    <input type="hidden" id="quiz_id" name="quiz_id" value="<?= $quiz['quiz_id']; ?>">
                                                     <button class="btn-transit3 btn" type="submit">Upravit</button>
                                                 </form>
-                                                </div>
-                                                <div class="col-lg-6 col-sm-6">
-                                                <button class="btn-transit2 btn" type="reset">Smazat</button>
-
-                                                </div>
-                                              
-                                              
+                                                <form action="php/delete-quiz.php" method="post">
+                                                    <input type="hidden" id="quiz_id" name="quiz_id" value="<?= $quiz['quiz_id']; ?>">
+                                                    <button class="btn-transit2 btn" type="submit">Smazat</button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>

@@ -188,6 +188,8 @@ header {
 .card {
   background-color: $bg-transit !important;
   color:  $txt-color-main !important;
+  overflow-x: scroll;
+  max-height: 80vh;
 
   .btn-blue {
     i {
