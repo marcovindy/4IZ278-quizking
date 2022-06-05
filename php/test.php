@@ -88,12 +88,19 @@
     <script>
 var jsonobj ='<?= $myJSON ?>';
   
-// Here we convert JSON to object
 var obj = JSON.parse(jsonobj);
+var str = JSON.stringify(obj);
+
+
+obj.answers.forEach(answer => {
+    document.getElementById("test").innerHTML = answer.text;
+   
+  });
+
+  document.getElementById("test").innerHTML = str;
   
-document.getElementById("test").innerHTML = 
-                     obj.question;
-document.getElementById("test1").innerHTML =jsonobj;
+// document.getElementById("test").innerHTML = ;
+document.getElementById("test1").innerHTML = jsonobj;
 </script>
 </body>
 
