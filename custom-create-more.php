@@ -39,7 +39,7 @@ if (!empty($_SESSION['user_id'])) {
 
         # kontrola názvu
         if (empty($title)) {
-            $errors['quiz_title'] = 'Musíte název kvízu.';
+            $errors['quiz_title'] = 'Musíte zadat název kvízu.';
         }
 
         if (empty($errors)) {
@@ -107,8 +107,14 @@ if (!empty($_SESSION['user_id'])) {
                 <div class="col-lg-8 col-md-8 col-sm-12">
 
                     <div class="form-box">
-                        
-                        <h1><?= $errors ?></h1>
+                      
+                        <h1>
+                    <?php 
+                    foreach ($errors as $error){
+                        echo $error;
+                    }
+                    ?>        
+                    </h1>
                     </div>
                 </div>
             </div>
