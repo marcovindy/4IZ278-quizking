@@ -1,4 +1,4 @@
-@import 'import/variables.scss';
+@import 'import/variables';
 @import 'import/form';
 @import 'import/header';
 html {
@@ -37,7 +37,7 @@ body {
 
 .bg-transit {
   background-color: $bg-transit !important;
-  color: white;
+  color:  $txt-color-main;
 }
 
 .btn-blue {
@@ -50,7 +50,7 @@ body {
   color: $base-color-blue !important;
   &:hover {
     background: $base-color-blue !important;
-    color: #fff;
+    color: $txt-color-main;
     border-radius: 5px;
     box-shadow: 0 0 20px $base-color-blue;
   }
@@ -58,10 +58,11 @@ body {
 
 .btn-transit2 {
   background-color: transparent !important;
-  border: 1px solid white !important;
-  color: white !important;
+  border: 1px solid $txt-color-main !important;
+  color: $txt-color-main !important;
   &:hover {
     box-shadow: 0 0 20px red;
+    color: $txt-color-main !important;
   }
 }
 
@@ -79,7 +80,7 @@ button {
 
   &:hover {
 
-    color: #fff !important;
+    color: $txt-color-main !important;
   }
 }
 
@@ -127,11 +128,11 @@ a.hyper-item {
   a {
     display: block;
     padding: 10px 30px;
-    color: #fff;
+    color: $txt-color-main;
   }
 
   button.btn {
-    color: #fff;
+    color: $txt-color-main;
     padding: 10px 30px;
     &::after {
       display: inline-block;
@@ -145,16 +146,13 @@ a.hyper-item {
     }
   }
 
-  .collapse ul li a {
-    padding: 10px 40px;
-  }
 
   .btn:focus {
     box-shadow: none !important;
   } 
 
   box-sizing: border-box;
-  box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
+  box-shadow: 1px 15px 12px rgba(0, 0, 0, 0.6);
 }
 
 /* HEADER */
@@ -177,7 +175,7 @@ header {
 /* PROFILE */
 .card {
   background-color: $bg-transit !important;
-  color: white !important;
+  color:  $txt-color-main !important;
 
   .btn-blue {
     i {
@@ -202,10 +200,10 @@ header {
 /* QUIZZES */
 .quiz {
   transition: .5s;
-  color: white;
+  color:  $txt-color-main;
   &:hover {
     background-color: $base-color-blue;
-    color: $bg-transit;
+    color:  $txt-color-main;
   }
 }
 

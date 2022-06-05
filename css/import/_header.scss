@@ -1,8 +1,12 @@
 
 
 header {
-    background: rgba(0, 0, 0, 0.5);
+    background:  $bg-transit;
+    z-index: 100;
+    box-shadow: 0 -1px 25px rgba(0, 0, 0, 0.6)
 }
+
+
 
 .nav-dropdown {
     position: absolute;
@@ -14,7 +18,7 @@ header {
   .logo-bar {
     min-width: 168px;
     text-align: center;
-
+    color: $txt-color-main;
   }
 
   .dropdown-menu {

@@ -50,7 +50,7 @@
   position: relative;
   display: inline-block;
   padding: 10px 20px;
-  color: #03e9f4;
+  color: #39B54A;
   font-size: 16px;
   text-decoration: none;
   text-transform: uppercase;
@@ -64,12 +64,12 @@
 }
 
 .form-box button:hover {
-  background: #03e9f4 !important;
+  background: #39B54A !important;
   border: 0 !important;
-  color: #fff;
+  color: black;
   border-radius: 5px;
-  -webkit-box-shadow: 0 0 20px #03e9f4;
-          box-shadow: 0 0 20px #03e9f4;
+  -webkit-box-shadow: 0 0 20px #39B54A;
+          box-shadow: 0 0 20px #39B54A;
 }
 
 .form-box button span {
@@ -82,8 +82,8 @@
   left: -100%;
   width: 100%;
   height: 2px;
-  background: -webkit-gradient(linear, left top, right top, from(transparent), to(#03e9f4));
-  background: linear-gradient(90deg, transparent, #03e9f4);
+  background: -webkit-gradient(linear, left top, right top, from(transparent), to(#39B54A));
+  background: linear-gradient(90deg, transparent, #39B54A);
   -webkit-animation: btn-anim1 2s linear infinite;
           animation: btn-anim1 2s linear infinite;
 }
@@ -113,8 +113,8 @@
   right: 0;
   width: 2px;
   height: 100%;
-  background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(#03e9f4));
-  background: linear-gradient(180deg, transparent, #03e9f4);
+  background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(#39B54A));
+  background: linear-gradient(180deg, transparent, #39B54A);
   -webkit-animation: btn-anim2 2s linear infinite;
           animation: btn-anim2 2s linear infinite;
   -webkit-animation-delay: 0.5s;
@@ -146,8 +146,8 @@
   right: -100%;
   width: 100%;
   height: 2px;
-  background: -webkit-gradient(linear, right top, left top, from(transparent), to(#03e9f4));
-  background: linear-gradient(270deg, transparent, #03e9f4);
+  background: -webkit-gradient(linear, right top, left top, from(transparent), to(#39B54A));
+  background: linear-gradient(270deg, transparent, #39B54A);
   -webkit-animation: btn-anim3 2s linear infinite;
           animation: btn-anim3 2s linear infinite;
   -webkit-animation-delay: 1s;
@@ -179,8 +179,8 @@
   left: 0;
   width: 2px;
   height: 100%;
-  background: -webkit-gradient(linear, left bottom, left top, from(transparent), to(#03e9f4));
-  background: linear-gradient(360deg, transparent, #03e9f4);
+  background: -webkit-gradient(linear, left bottom, left top, from(transparent), to(#39B54A));
+  background: linear-gradient(360deg, transparent, #39B54A);
   -webkit-animation: btn-anim4 2s linear infinite;
           animation: btn-anim4 2s linear infinite;
   -webkit-animation-delay: 1.5s;
@@ -216,7 +216,10 @@ input:-webkit-autofill {
 }
 
 header {
-  background: rgba(0, 0, 0, 0.5);
+  background: white;
+  z-index: 100;
+  -webkit-box-shadow: 0 -1px 25px rgba(0, 0, 0, 0.6);
+          box-shadow: 0 -1px 25px rgba(0, 0, 0, 0.6);
 }
 
 .nav-dropdown {
@@ -230,11 +233,12 @@ header {
 .logo-bar {
   min-width: 168px;
   text-align: center;
+  color: black;
 }
 
 .dropdown-menu {
   left: -60px !important;
-  background-color: rgba(0, 0, 0, 0.5) !important;
+  background-color: white !important;
 }
 
 .dropdown-menu a {
@@ -243,7 +247,7 @@ header {
 
 .dropdown-menu a:hover {
   background: none;
-  color: #03e9f4 !important;
+  color: #39B54A !important;
 }
 
 html {
@@ -254,8 +258,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background: -webkit-gradient(linear, left top, left bottom, from(#1d2b44), to(#284361));
-  background: linear-gradient(#1d2b44, #284361);
+  background: -webkit-gradient(linear, left top, left bottom, from(#0E76BC), to(#25ABE2));
+  background: linear-gradient(#0E76BC, #25ABE2);
   min-height: 100vh;
 }
 
@@ -282,37 +286,38 @@ body {
 }
 
 .bg-transit {
-  background-color: rgba(0, 0, 0, 0.5) !important;
-  color: white;
+  background-color: white !important;
+  color: black;
 }
 
 .btn-blue {
-  background-color: #03e9f4 !important;
+  background-color: #39B54A !important;
 }
 
 .btn-transit {
   background-color: transparent !important;
-  border: 1px solid #03e9f4 !important;
-  color: #03e9f4 !important;
+  border: 1px solid #39B54A !important;
+  color: #39B54A !important;
 }
 
 .btn-transit:hover {
-  background: #03e9f4 !important;
-  color: #fff;
+  background: #39B54A !important;
+  color: black;
   border-radius: 5px;
-  -webkit-box-shadow: 0 0 20px #03e9f4;
-          box-shadow: 0 0 20px #03e9f4;
+  -webkit-box-shadow: 0 0 20px #39B54A;
+          box-shadow: 0 0 20px #39B54A;
 }
 
 .btn-transit2 {
   background-color: transparent !important;
-  border: 1px solid white !important;
-  color: white !important;
+  border: 1px solid black !important;
+  color: black !important;
 }
 
 .btn-transit2:hover {
   -webkit-box-shadow: 0 0 20px red;
           box-shadow: 0 0 20px red;
+  color: black !important;
 }
 
 .card .row {
@@ -326,7 +331,7 @@ button {
 
 a:hover,
 button:hover {
-  color: #fff !important;
+  color: black !important;
 }
 
 a.hyper-item {
@@ -341,7 +346,7 @@ a.hyper-item span {
   left: -100%;
   width: 100%;
   height: 2px;
-  background: #03e9f4;
+  background: #39B54A;
   -webkit-transition: 0.35s;
   transition: 0.35s;
 }
@@ -359,12 +364,12 @@ a.hyper-item:hover span {
   width: 200px;
   min-height: 100vh;
   display: block;
-  background: rgba(0, 0, 0, 0.5);
+  background: white;
   position: absolute;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  -webkit-box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
-          box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+  -webkit-box-shadow: 1px 15px 12px rgba(0, 0, 0, 0.6);
+          box-shadow: 1px 15px 12px rgba(0, 0, 0, 0.6);
 }
 
 .sidebar-box-logo {
@@ -376,11 +381,11 @@ a.hyper-item:hover span {
 .sidebar a {
   display: block;
   padding: 10px 30px;
-  color: #fff;
+  color: black;
 }
 
 .sidebar button.btn {
-  color: #fff;
+  color: black;
   padding: 10px 30px;
 }
 
@@ -393,10 +398,6 @@ a.hyper-item:hover span {
   border-right: 0.3em solid transparent;
   border-bottom: 0;
   border-left: 0.3em solid transparent;
-}
-
-.sidebar .collapse ul li a {
-  padding: 10px 40px;
 }
 
 .sidebar .btn:focus {
@@ -419,8 +420,8 @@ header .container .row {
 
 /* PROFILE */
 .card {
-  background-color: rgba(0, 0, 0, 0.5) !important;
-  color: white !important;
+  background-color: white !important;
+  color: black !important;
 }
 
 .card .btn-blue i {
@@ -447,12 +448,12 @@ header .container .row {
 .quiz {
   -webkit-transition: .5s;
   transition: .5s;
-  color: white;
+  color: black;
 }
 
 .quiz:hover {
-  background-color: #03e9f4;
-  color: rgba(0, 0, 0, 0.5);
+  background-color: #39B54A;
+  color: black;
 }
 
 /* FILTER */
