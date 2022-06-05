@@ -1,0 +1,67 @@
+@import 'import/variables';
+
+
+:root {
+  --hue-neutral: 200;
+  --hue-wrong: 0;
+  --hue-correct: 145;
+}
+
+body {
+
+  &.correct {
+    background: $bg-gradient-correct !important;
+  }
+  &.wrong {
+    background: $bg-gradient-wrong  !important;
+  }
+}
+
+#question {
+  padding: 1rem;
+}
+
+
+
+.container-quiz {
+  width: 800px;
+  max-width: 80%;
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 0 10px 2px;
+}
+
+
+.btn-transit {
+  
+  cursor: pointer;
+  &:hover {
+    border-color: black;
+  }
+  &.correct {
+    background: $base-color-green !important;
+    color: black !important;
+  }
+  &.wrong {
+    background: $base-color-red !important;
+    color: black !important;
+  }
+}
+
+.start-btn, .next-btn {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 10px 20px;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+}
+
+.hide {
+  display: none;
+}

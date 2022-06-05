@@ -129,7 +129,7 @@ if (!isset($_GET['categories'])) {
                         <?php if (!empty($quizzes)) : ?>
                             <?php foreach ($quizzes as $quiz) : array_map('htmlentities', $quiz); ?>
                                 <?php $numOfCat = count($quizzes); ?>
-                                <a href="php/test.php?quiz_id=<?= $quiz['quiz_id'] ?>">
+                                <a href="php/json.php?quiz_id=<?= $quiz['quiz_id'] ?>">
                                     <div class="quiz p-3">
                                         <div class="row">
                                             <div class="col-8">
