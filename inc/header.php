@@ -1,8 +1,6 @@
 <?php
 session_start();
 
-if (empty($_SESSION)) {
-}
 
 ?>
 
@@ -25,13 +23,13 @@ if (empty($_SESSION)) {
           <button class="btn text-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
             <?= $_SESSION['user_name'] ?>
           </button>
+          
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <li><a class="dropdown-item" href="profile.php">Profil</a></li>
+                    <li><a class="dropdown-item" href="change-password.php">Změnit heslo</a></li>
+                    <li><a class="dropdown-item" href="php/logout.php">Odhlásit</a></li>
+                  </ul>
         <?php endif; ?>
-
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <li><a class="dropdown-item" href="profile.php">Profil</a></li>
-          <li><a class="dropdown-item" href="change-password.php">Změnit heslo</a></li>
-          <li><a class="dropdown-item" href="php/logout.php">Odhlásit</a></li>
-        </ul>
       </div>
     </div>
   </nav>

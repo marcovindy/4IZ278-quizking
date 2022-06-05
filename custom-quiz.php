@@ -85,7 +85,7 @@ $numOfCat = 0;
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <?php if (!isset($_GET['categories'])) : ?>
-                            <h1>Všechny Kvízy</h1>
+                            <h1>Vlastní Kvízy</h1>
                         <?php endif; ?>
 
                         <?php
@@ -97,7 +97,7 @@ $numOfCat = 0;
                             }
                             $text .= "</h1>";
                             if ($numOfCat == count($names)) {
-                                $text = "<h2>Všechny kvízy</h2>";
+                                $text = "<h1>Vlastní kvízy</h1>";
                             }
                             echo $text;
                         }
@@ -180,7 +180,7 @@ $numOfCat = 0;
                 <?php if (!empty($_SESSION)) : ?>
                     <div class="row pt-4">
                         <div class="m-auto col-lg-3 col-sm-12">
-                            <a href="#" class="btn btn-circle btn-transit w-100">
+                            <a href="custom-create.php" class="btn btn-circle btn-transit w-100">
                                 Vytvořit kvíz
                             </a>
                         </div>

@@ -6,7 +6,7 @@
 .form-box {
   width: 400px;
   padding: 40px;
-  background: rgba(0, 0, 0, .5);
+  background: $bg-transit;
   box-sizing: border-box;
   box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
   border-radius: 10px;
@@ -18,7 +18,7 @@
 .form-box h2 {
   margin: 0 0 30px;
   padding: 0;
-  color: #fff;
+  color: $txt-color-main;
   text-align: center;
 }
 
@@ -31,17 +31,17 @@
   width: 100%;
   padding: 8px 0;
   font-size: 16px;
-  color: #fff;
+  color: $txt-color-main !important;
   margin-bottom: 30px;
   border: none;
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid $txt-color-main;
   outline: none;
   background: transparent;
 }
 
 .form-box .item-box label {
   font-size: 13px;
-  color: #fff;
+  color: $txt-color-main;
   padding: 0;
   pointer-events: none;
   transition: .5s;
@@ -164,7 +164,7 @@
 
 /* Změnbutton Autocomplete stylů*/
 input:-webkit-autofill {
-  -webkit-text-fill-color: white;
+  -webkit-text-fill-color: $txt-color-main;
   -webkit-box-shadow: 0 0 0px 1000px rgba(0,0,0,0) inset;
   transition: background-color 5000s ease-in-out 0s;
 }

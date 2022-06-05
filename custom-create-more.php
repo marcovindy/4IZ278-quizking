@@ -1,15 +1,66 @@
 <?php
-  //načteme připojení k databázi a inicializujeme session
-  require_once 'inc/user.php';
 
-  if (!empty($_SESSION['user_id'])){
-    //uživatel už je přihlášený, nemá smysl, aby se registroval
-    header('Location: index.php');
-    exit();
-  }
+//načteme připojení k databázi
+require_once 'inc/db.php';
+
+session_start();
+
+$errors = [];
+
+if (empty($_SESSION)) {
+    $errors['user'] = 'Zde nemůžete, pokud nejste příhlášení.';
+    header("refresh:3, Location: index.php");
+}
+
+ if (!empty($_POST['category'])){
+
+    $categoryQuery=$db->prepare('SELECT * FROM categories WHERE category_id=:category LIMIT 1;');
+    $categoryQuery->execute([
+        ':category'=>$_POST['category']
+    ]);
+    if ($categoryQuery->rowCount()==0){
+        $errors['category']='Zvolená kategorie neexistuje!';
+        $_POST['category']='0';
+    }
+
+}else{
+    $errors['category']='Musíte vybrat kategorii.';
+}
+
+if (!empty($_SESSION['user_id'])) {
+    $userId = $_SESSION['user_id'];
+
+    if (!empty($_POST)) {
+
+        # zpracování formuláře
+
+        $title = trim(@$_POST['quiz_title']);
+        $cat = trim(@$_POST['category']);
+
+        # kontrola názvu
+        if (empty($title)) {
+            $errors['quiz_title'] = 'Musíte název kvízu.';
+        }
+
+        if (empty($errors)) {
+
+            $query = $db->prepare('INSERT INTO quizzes (quiz_title, quiz_user_id, quiz_category_id, quiz_price, quiz_verified) VALUES (:title, :userID, :category, 0, 0);');
+            $query->execute([
+                ':title' => $title,
+                ':userID' => $userId,
+                ':category' => $cat
+            ]);
+
+            header("refresh:3, Location: custom-quiz.php");
+            $text="";
+            if(empty($errors)){
+                $text="Kvíz byl vytvořen";
+            }
+        }
+    }
+}
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -41,6 +92,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
 
+
+
 </head>
 
 <body>
@@ -48,41 +101,14 @@
 
     <?php require_once('inc/nav.php'); ?>
 
-
-
     <div class="page-wrapper">
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-lg-8 col-md-8 col-sm-12">
 
                     <div class="form-box">
-                        <h1>Registrace</h1>
-                        <form method="POST" action="php/signup.php">
-                            <div class="item-box">
-                                <label for="user_name">Přihlašovací jméno</label>
-                                <input type="text" id="user_name" name="user_name" required="">
-
-                            </div>
-                            <div class="item-box">
-                                <label for="user_email">E-mail</label>
-                                <input type="email" id="user_email" name="user_email" required="">
-                            </div>
-                            <div class="item-box">
-                                <label for="user_pwd">Heslo</label>
-                                <input type="password" id="user_pwd" name="user_pwd" required="">
-                            </div>
-                            <div class="item-box">
-                                <label for="user_pwd_co">Potvrzení hesla</label>
-                                <input type="password" id="user_pwd_co" name="user_pwd_co" required="">
-                            </div>
-                            <button type="submit" id="submit">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                Registrovat
-                            </button>
-                        </form>
+                        
+                        <h1><?= $errors ?></h1>
                     </div>
                 </div>
             </div>

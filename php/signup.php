@@ -4,17 +4,16 @@ require_once '../inc/db.php';
 
 $errors=[];
 if (!empty($_POST)){
-  #region zpracování formuláře
+  #zpracování formuláře
 
   $userName=trim(@$_POST['user_name']);
   $userEmail=trim(@$_POST['user_email']);
   $userPwd=$_POST['user_pwd'];
 
-  #region kontrola jména
+  # kontrola jména
   if (empty($userName)){
     $errors['user_name']='Musíte zadat své jméno či přezdívku.';
   }
-  #endregion kontrola jména
 
   #region kontrola emailu
   if (!filter_var($userEmail,FILTER_VALIDATE_EMAIL)){
@@ -29,7 +28,6 @@ if (!empty($_POST)){
       $errors['user_email']='Uživatelský účet s touto e-mailovou adresou již existuje.';
     }
   }
-  #endregion kontrola emailu
 
   #region kontrola hesla
   if (empty($_POST['user_pwd']) || (strlen($_POST['user_pwd'])<5)){
@@ -38,7 +36,6 @@ if (!empty($_POST)){
   if ($_POST['user_pwd']!=$_POST['user_pwd_co']){
     $errors['user_pwd_co']='Zadaná hesla se neshodují.';
   }
-  #endregion kontrola hesla
 
   if (empty($errors)){
     //zaregistrování uživatele
@@ -62,6 +59,4 @@ if (!empty($_POST)){
     header('Location: ../index.php');
     exit();
   }
-
-  #endregion zpracování formuláře
 }
