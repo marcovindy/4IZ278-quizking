@@ -19,6 +19,9 @@ session_start();
           <a href="login.php" class="link-dark rounded hyper-item">
             Příhlásit se
           </a>
+          <a href="register.php" class="link-dark rounded hyper-item ml-2">
+            Registrovat
+          </a>
         <?php else : ?>
           <button class="btn text-text-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
             <?= $_SESSION['user_name'] ?>

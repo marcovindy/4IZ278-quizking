@@ -44,7 +44,7 @@
 </head>
 
 <body>
-    <?php require_once('inc/header.php'); ?>
+    <?php require_once('inc/header-unlog.php'); ?>
 
     <?php require_once('inc/nav.php'); ?>
 
@@ -59,7 +59,7 @@
                         <h1>Registrace</h1>
                         <form method="POST" action="php/signup.php">
                             <div class="item-box">
-                                <label for="user_name">Přihlašovací jméno</label>
+                                <label for="user_name">Jméno</label>
                                 <input type="text" id="user_name" name="user_name" required="">
 
                             </div>

@@ -128,7 +128,7 @@ a.hyper-item {
 /* SIDEBAR */
 .sidebar {
   width: $aside-width;
-  min-height: 100vh;
+  min-height: calc(100vh - 54px);
   display: block;
   background: $bg-transit;
   position: absolute;

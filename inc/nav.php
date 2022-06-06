@@ -8,11 +8,6 @@
         </a>
       </li>
       <li class="mb-1">
-        <a href="index.php?filter=favorite" class="link-dark rounded hyper-item">Oblíbené kvízy
-          <span></span><span></span>
-        </a>
-      </li>
-      <li class="mb-1">
         <a href="custom-quiz.php" class="link-dark rounded hyper-item">Vlastní kvízy
           <span></span><span></span>
         </a>
@@ -28,18 +23,12 @@
         </button>
         <div class="collapse" id="dashboard-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
-            <li><a href="quiz-all.php" class="link-dark rounded hyper-item">Nahlásit problém
+            <li><a href="report.php" class="link-dark rounded hyper-item">Nahlásit problém
+                <span></span><span></span>
+              </a></li>     <li><a href="kontakt.php" class="link-dark rounded hyper-item">Kontakt
                 <span></span><span></span>
               </a></li>
-            <li><a href="" class="link-dark rounded hyper-item">Oblíbené kvízy
-                <span></span><span></span>
-              </a></li>
-            <li><a href="#" class="link-dark rounded hyper-item">Vlastní kvízy
-                <span></span><span></span>
-              </a></li>
-            <li><a href="#" class="link-dark rounded hyper-item">Nový kvíz
-                <span></span><span></span>
-              </a></li>
+            
           </ul>
         </div>
       </li>

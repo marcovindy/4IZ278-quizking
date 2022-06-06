@@ -18,10 +18,9 @@ if (!empty($_POST)) {
         ':user_email' => trim($_POST['user_email'])
     ]);
     if ($user = $userQuery->fetch(PDO::FETCH_ASSOC)) {
-     
-       
-        if ($_POST['user_pwd'] == $user['user_pwd']) 
-        { 
+
+
+        if ($_POST['user_pwd'] == $user['user_pwd']) {
             //heslo je platné => přihlásíme uživatele
             $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['user_name'] = $user['user_name'];
@@ -76,7 +75,7 @@ if (!empty($_POST)) {
 
 
 <body>
-    <?php require_once('inc/header.php'); ?>
+    <?php require_once('inc/header-unlog.php'); ?>
     <?php require_once('inc/nav.php'); ?>
 
     <div class="page-wrapper">
@@ -86,7 +85,7 @@ if (!empty($_POST)) {
 
 
                     <div class="form-box">
-                        <h2>Přihlášení</h2>
+                        <h1>Přihlášení</h1>
                         <form method="POST">
 
                             <div class="item-box">
@@ -97,14 +96,16 @@ if (!empty($_POST)) {
                                 <label for="user_pwd">Heslo</label>
                                 <input type="password" name="user_pwd" id="user_pwd" name="user_pwd" required="">
                             </div>
-                            <button type="submit" id="submit">     Přihlásit se
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            </input>
-                    
+                            <button type="submit" id="submit"> Přihlásit se
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </button>
                         </form>
+                    
+
+
                     </div>
                 </div>
             </div>

@@ -388,7 +388,7 @@ a.hyper-item:hover span {
 /* SIDEBAR */
 .sidebar {
   width: 200px;
-  min-height: 100vh;
+  min-height: calc(100vh - 54px);
   display: block;
   background: white;
   position: absolute;
