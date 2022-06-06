@@ -1,45 +1,33 @@
 <?php
 $result = "";
-if ( !empty( $_POST ) ) {
-    $xml = simplexml_load_file( "quizking.8u.cz" );
-    if ( !empty( $xml->channel ) ) {
-        foreach ($xml->channel as $channel) {
-            if (!empty( $channel->item )) {
-                foreach ($channel->item as $item){
-                    $result .= '<a href="'. $item->link .'">' . htmlspecialchars($item->title). '</a><br/>';
-                }
-            }
-        }
+if (!empty($_POST)) {
+    $to = "vanm32@vse.cz";
+    if (!empty($_POST['subject'])) {
+        $subjectText = $_POST['subject'];
+    } else {
+        $subjectText = "Neznámý předmět";
     }
+    $subject = '=?UTF-8?B?' . base64_encode($subjectText) . '?=';
+    $text = $_POST['text'];
+    $msg = base64_encode($text);
+    $headers  = "From: Marek Vaníček <test@mareksite.com>\r\n";
+    $headers .= "Cc: Další člověk <mail@mail.com>\r\n";
+    $headers .= "X-Sender: MarekSite <mail@mareksite.com>\r\n";
+    $headers .= 'X-Mailer: PHP/' . phpversion() . "\r\n";
+    $headers .= "X-Priority: 1\r\n";
+    $headers .= "Return-Path: test@mareksite.com\r\n";
+    $headers .= "MIME-Version: 1.0\r\n";
+    $headers .= "Content-Type: text/html; charset=iso-8859-1\r\n";
+    $headers .= 'Content-Type: text/plain; charset=utf-8' . "\r\n";
+    $headers .= 'Content-Transfer-Encoding: base64';
 
+    if (mail($to, $subject, $msg, $headers)) {
+        $result = "<div>Zpráva se povedla odeslat.</div>";
+    } else {
+        $result = "<div>Zpráva se nepovedla odeslat.</div>";
+    }
 }
 
-$to = "vanm32@vse.cz";
-
-if ( !empty( $_POST['subject'] )) {
-    $subjectText = $_POST['subject'];
-} else {
-    $subjectText = "Neznámý předmět";
-}
-$subject = '=?UTF-8?B?' . base64_encode($subjectText) . '?=';
-$text = $_POST['text'];
-$msg = base64_encode($text);
-$headers  = "From: Marek Vaníček <test@mareksite.com>\r\n";
-$headers .= "Cc: Další člověk <mail@mail.com>\r\n"; 
-$headers .= "X-Sender: MarekSite <mail@mareksite.com>\r\n";
-$headers .= 'X-Mailer: PHP/' . phpversion() . "\r\n";
-$headers .= "X-Priority: 1\r\n";
-$headers .= "Return-Path: test@mareksite.com\r\n";
-$headers .= "MIME-Version: 1.0\r\n";
-$headers .= "Content-Type: text/html; charset=iso-8859-1\r\n";
-$headers .= 'Content-Type: text/plain; charset=utf-8' . "\r\n";
-$headers .= 'Content-Transfer-Encoding: base64';
-
-if ( mail($to, $subject, $msg, $headers) ) {
-    echo "<div>Zpráva se povedla odeslat.</div>";
-} else {
-    echo "<div>Zpráva se nepovedla odeslat.</div>";
-}
 
 ?>
 
@@ -77,7 +65,7 @@ if ( mail($to, $subject, $msg, $headers) ) {
 
 
 <body>
-    <?php require_once('inc/header-unlog.php'); ?>
+    <?php require_once('inc/header.php'); ?>
     <?php require_once('inc/nav.php'); ?>
 
     <div class="page-wrapper">
@@ -87,7 +75,8 @@ if ( mail($to, $subject, $msg, $headers) ) {
 
 
                     <div class="form-box">
-                        <h1>Přihlášení</h1>
+                        <h1>Nahlásit problém</h1>
+
                         <form method="POST">
 
                             <div class="item-box">
@@ -98,6 +87,11 @@ if ( mail($to, $subject, $msg, $headers) ) {
                                 <label for="text">Zpráva</label>
                                 <input type="text" name="text" id="text" name="text" required="">
                             </div>
+                            <?php
+                            if ($result != "") {
+                                echo "<h3>".$result."</h3>";
+                            }
+                            ?>
                             <button type="submit" id="submit"> Odeslat report
                                 <span></span>
                                 <span></span>

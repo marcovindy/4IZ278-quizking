@@ -37,7 +37,44 @@
 
     <?php require_once('inc/nav.php'); ?>
 
-   
+    <?php require_once('inc/db.php'); ?>
+
+
+    <?php
+
+
+
+    $result = "";
+    if (!empty($_POST)) {
+        $query = $db->query('SELECT * FROM users WHERE user_id="' . $_SESSION['user_id'] . '" LIMIT 1');
+        $users = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        $oldPwd = $_POST['user_pwd_old'];
+        $newPwd = $_POST['user_pwd_new'];
+        $co = $_POST['user_pwd_new_co'];
+        $userId = $_SESSION['user_id'];
+        foreach ($users as $user) {
+            $user['user_pwd'] = $user['user_pwd'];
+        }
+        if ($user['user_pwd'] != $oldPwd) {
+            $result = "Zadal jsi špatně staré heslo";
+        } else {
+            if ($newPwd != $oldPwd) {
+                if ($newPwd != $co) {
+                    $result = "Hesla nejsou stejná";
+                } else {
+                    $query = $db->prepare('UPDATE users SET user_pwd="' . $newPwd . '" WHERE user_id="' . $userId . '"');
+                    if ($query->execute()) {
+                        $result = "Heslo se povedlo změnit";
+                    }
+                }
+            } else {
+                $result = "Nové heslo nemůže být stejné, jako staré";
+            }
+        }
+    }
+    ?>
+
 
     <div class="page-wrapper">
         <div class="container-fluid">
@@ -46,29 +83,34 @@
 
                     <div class="form-box">
                         <h2>Změna hesla</h2>
-                        <form>
+                        <form method="post">
                             <div class="item-box">
-                                <label for="user_name">Staré heslo</label>
+                                <label for="user_pwd_old">Staré heslo</label>
                                 <input type="password" id="user_pwd_old" name="user_pwd_old" required="">
 
                             </div>
                             <div class="item-box">
-                                <label for="user_email">Nové heslo</label>
+                                <label for="user_pwd_new">Nové heslo</label>
                                 <input type="password" id="user_pwd_new" name="user_pwd_new" required="">
                             </div>
                             <div class="item-box">
-                                <label for="user_pwd">Potvrzení nového hesla</label>
+                                <label for="user_pwd_new_co">Potvrzení nového hesla</label>
                                 <input type="password" id="user_pwd_new_co" name="user_pwd_new_co" required="">
                             </div>
-                
-                     
-                            <a href="#">
+
+                            <?php
+                            if ($result != "") {
+                                echo "<h3>" . $result . "<h3>";
+                            }
+                            ?>
+
+                            <button type="submit" id="submit">
                                 <span></span>
                                 <span></span>
                                 <span></span>
                                 <span></span>
                                 Změnit heslo
-                            </a>
+                            </button>
                         </form>
                     </div>
                 </div>

@@ -125,7 +125,7 @@ $questions = $query->fetchAll(PDO::FETCH_ASSOC);
                             <?php foreach ($questions as $q) : array_map('htmlentities', $q); ?>
                                 <hr>
                                 <div class="row">
-                                    <a href="#" class="btn btn-transit2">Smazat Otázku</a>
+                                    <a href="php/delete-question.php?question_id=<?= $q['question_id'] ?>&quiz_id=<?= $_POST['quiz_id']?>" class="btn btn-transit2">Smazat Otázku</a>
                                     <a href="custom-answer-create.php?question_id=<?= $q['question_id'] ?>&quiz_id=<?= $_POST['quiz_id'] ?>" class="btn btn-transit">Přidat odpověď</a>
                                     <p>Otázka: <?= $q['question_question']; ?></p>
                                 </div>
@@ -141,7 +141,7 @@ $questions = $query->fetchAll(PDO::FETCH_ASSOC);
                                     <?php foreach ($answers as $a) : array_map('htmlentities', $a); ?>
                                         <div class="row">
                                             <div class="col-3">
-                                                <a href="#" class="btn btn-transit2">Smazat</a>
+                                                <a href="php/delete-answer.php?answer_id=<?= $a['answer_id'] ?>&quiz_id=<?= $_POST['quiz_id'] ?>"  class="btn btn-transit2">Smazat</a>
                                             </div>
                                             <div class="col-9">
                                                 <p>Odpověď: <?= $a['answer_answer']; ?>

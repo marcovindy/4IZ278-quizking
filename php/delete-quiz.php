@@ -20,5 +20,5 @@ if(empty($error)){
   
 }
 
-header( "refresh:1; url=../custom-quiz.php" ); 
+header( "refresh:2; url=../custom-quiz.php" ); 
 

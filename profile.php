@@ -35,13 +35,24 @@
 
     <?php require_once('inc/nav.php'); ?>
 
+    <?php require_once('inc/db.php'); ?>
+
+    <?php
+    $query = $db->query('SELECT users.* FROM users WHERE users.user_id="' . $_SESSION['user_id'] . '"');
+    $users = $query->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($users as $user) {
+        $coins = $user['user_coins'];
+        $exps = $user['user_exp'];
+    }
+    ?>
+
     <div class="page-wrapper">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-8 col-md-8 col-sm-12">
 
                     <div class="card bg-transit">
-                    <div class="card-header">
+                        <div class="card-header">
                             <h6>Informace</h6>
                         </div>
                         <div class="card-body text-center">
@@ -49,8 +60,8 @@
                                 <img src="img/users/5.jpg" class="rounded-circle" width="150">
                             </div>
 
-                            <h4 class="card-title m-t-10">Marek Párek</h4>
-                            <h6 class="card-subtitle">Level 3</h6>
+                            <h4 class="card-title m-t-10"><?= $_SESSION['user_name'] ?></h4>
+                            <h6 class="card-subtitle">Zkušenosti <?= $exps; ?></h6>
                             <div class="row text-center justify-content-md-center">
                                 <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-people"></i>
 
@@ -62,11 +73,8 @@
                         </div>
                         <div class="card-body">
                             <span class="text-muted ">E-mail:</span>
-                            <h6>hannagover@gmail.com</h6>
-                            <span class="text-muted ">Telefon:</span>
-                            <h6>+111 111 111 111</h6>
-                            <a class="btn btn-circle btn-blue fb"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-circle btn-blue ig"><i class="fab fa-youtube"></i></a>
+                            <h6><?= $_SESSION['user_email'] ?></h6>
+                            <a href="facebook.com" class="btn btn-circle btn-blue fb"><i class="fab fa-facebook-f"></i></a>
                         </div>
                     </div>
 
@@ -77,31 +85,29 @@
                             <h6>Počet mincí</h6>
                         </div>
                         <div class="card-body d-flex justify-content-center ">
-                            <p class="d-block m-auto fs-1">98</p>
+                            <p class="d-block m-auto fs-1"><?= $coins; ?></p>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row mt-3">
                 <div class="col-12">
-                <div class="card bg-transit h-100">
+                    <div class="card bg-transit h-100">
                         <div class="card-header">
-                            <h6>Statistiky</h6>
+                            <h6>Žebříček</h6>
                         </div>
-                        <div class="card-body d-flex flex-wrap text-center justify-content-center ">
-                            <div class="col-lg-4 col-sm-12">
-                                <p>Počet hotových kvízů</p>
-                                <span>12</span>
-                            </div>
-                            <div class="col-lg-4 col-sm-12">
-                                <p>Počet přehrání kvízů</p>
-                                <span>11</span>
-                            </div>
-                            <div class="col-lg-4 col-sm-12">
-                                <p>Počet vytvořených kvízů</p>
-                                <span>0</span>
-                            </div>
-                        </div>
+
+                        <?php
+                        $query = $db->query('SELECT users.* FROM users ORDER BY users.user_exp DESC');
+                        $users = $query->fetchAll(PDO::FETCH_ASSOC);
+                        foreach ($users as $user) {
+                            echo '<div class="row text-center justify-content-center">';
+                            echo '<div class="col"><p>jmeno: ' . $user['user_name'] . '</p></div>';
+                            echo '<div class="col"><p>exp: ' . $user['user_exp'] . '</p></div>';
+                            echo '</div>';
+                        }
+                        ?>
+                    
                     </div>
                 </div>
             </div>
