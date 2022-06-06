@@ -88,7 +88,7 @@
                         <div class="card-header">
                             <h6>Statistiky</h6>
                         </div>
-                        <div class="card-body d-flex text-center justify-content-center ">
+                        <div class="card-body d-flex flex-wrap text-center justify-content-center ">
                             <div class="col-lg-4 col-sm-12">
                                 <p>Počet hotových kvízů</p>
                                 <span>12</span>

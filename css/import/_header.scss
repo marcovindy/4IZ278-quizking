@@ -3,16 +3,20 @@
 header {
     background:  $bg-transit;
     z-index: 100;
-    box-shadow: 0 -1px 25px rgba(0, 0, 0, 0.6)
+    box-shadow: 0 -1px 25px rgba(0, 0, 0, 0.6);
+    color: $txt-color-main !important;
 }
 
-
+button{
+    color: $txt-color-main !important;
+}
 
 .nav-dropdown {
     position: absolute;
     display: none;
     z-index: 1;
     box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+    color: $txt-color-main;
   }
   
   .logo-bar {
@@ -25,7 +29,7 @@ header {
       left: -60px !important;
       background-color: $bg-transit !important;
       a {
-          color: white;
+        color: $txt-color-main !important;
           &:hover {
               background: none;
               color: $base-color-blue !important;

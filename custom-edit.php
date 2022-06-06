@@ -15,16 +15,21 @@ if (!empty($_POST)) {
             $errors['quiz_id'] = 'Zvolený kvíz neexistuje!';
             $_POST['quiz_id'] = '';
         }
+    } else if (!empty($_GET['quiz_id'])) {
+        $_POST['quiz_id'] = $_GET['quiz_id'];
     } else {
-        $errors['quiz_id'] = 'Musíte vybrat kvíz.';
+        $errors['quiz_id'] = 'Není zvolený klíč!';
+    }
+} else if (!empty($_GET)) {
+    if (!empty($_GET['quiz_id'])) {
+        $_POST['quiz_id'] = $_GET['quiz_id'];
     }
 }
 
 
-
 $query = 'SELECT
                        questions.*
-                       FROM questions  WHERE questions.question_id="'.$_POST['quiz_id'].'" ;';
+                       FROM questions  WHERE questions.question_quiz_id="' . $_POST['quiz_id'] . '" ;';
 $query = $db->query($query);
 $questions = $query->fetchAll(PDO::FETCH_ASSOC);
 
@@ -73,7 +78,7 @@ $questions = $query->fetchAll(PDO::FETCH_ASSOC);
 
     <?php require_once('inc/nav.php'); ?>
 
-  
+
 
     <div class="page-wrapper">
         <div class="container-fluid">
@@ -114,29 +119,46 @@ $questions = $query->fetchAll(PDO::FETCH_ASSOC);
                         <h2 class="mt-4">Otázky</h2>
                         <div class="d-flex justify-content-center">
 
-                        <a  class="btn btn-transit mb-4" href="custom-question-create.php?quiz_id=<?=$_POST['quiz_id'];?>">Vytvořit novou</a>
+                            <a class="btn btn-transit mb-4" href="custom-question-create.php?quiz_id=<?= $_POST['quiz_id']; ?>">Vytvořit novou otázku</a>
                         </div>
                         <?php if (!empty($questions)) : ?>
                             <?php foreach ($questions as $q) : array_map('htmlentities', $q); ?>
-                            <p>Otázka: <?= $q['question_question']; ?></p>
+                                <hr>
+                                <div class="row">
+                                    <a href="#" class="btn btn-transit2">Smazat Otázku</a>
+                                    <a href="custom-answer-create.php?question_id=<?= $q['question_id'] ?>&quiz_id=<?= $_POST['quiz_id'] ?>" class="btn btn-transit">Přidat odpověď</a>
+                                    <p>Otázka: <?= $q['question_question']; ?></p>
+                                </div>
+
                                 <?php if (!empty($questions)) : ?>
                                     <?php
-                                        $query = 'SELECT
+                                    $query = 'SELECT
                                         answers.* 
-                                        FROM answers JOIN questions ON answers.question_id=questions.question_id WHERE answers.question_id="'.$_POST['quiz_id'].'" ;';
-                                          $query = $db->query($query);
-                                         $answers = $query->fetchAll(PDO::FETCH_ASSOC);
-                                        ?>
-                                        <?php foreach ($answers as $a) : array_map('htmlentities', $a); ?>
-                                        <p>Odpověď: <?= $a['answer_answer']; ?>  
-                                        <?php if ($a['answer_correct'] == 1) : ?>
-                                        Správně
-                                        <?php else: ?>
-                                        Špatně
-                                        <?php endif; ?>
-                                    </p>
-                                        <?php endforeach; ?>
-                                    <?php endif; ?>
+                                        FROM answers JOIN questions ON answers.question_id=questions.question_id WHERE answers.question_id="' . $q['question_id'] . '" ;';
+                                    $query = $db->query($query);
+                                    $answers = $query->fetchAll(PDO::FETCH_ASSOC);
+                                    ?>
+                                    <?php foreach ($answers as $a) : array_map('htmlentities', $a); ?>
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <a href="#" class="btn btn-transit2">Smazat</a>
+                                            </div>
+                                            <div class="col-9">
+                                                <p>Odpověď: <?= $a['answer_answer']; ?>
+
+                                                    <?php if ($a['answer_correct'] == 1) : ?>
+                                                        > Správně
+                                                    <?php else : ?>
+                                                        > Špatně
+                                                    <?php endif; ?>
+                                                </p>
+                                            </div>
+
+
+                                        </div>
+
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
                             <?php endforeach; ?>
                         <?php endif; ?>
 

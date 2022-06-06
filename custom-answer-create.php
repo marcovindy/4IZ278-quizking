@@ -5,18 +5,18 @@ require_once 'inc/db.php';
 
 $errors = [];
 if (!empty($_GET)) {
-    if (!empty($_GET['quiz_id'])) {
+    if (!empty($_GET['question_id'])) {
 
         $quizQuery = $db->prepare('SELECT quizzes.* FROM quizzes WHERE quizzes.quiz_id=:quiz_id LIMIT 1;');
         $quizQuery->execute([
             ':quiz_id' => $_GET['quiz_id']
         ]);
         if ($quizQuery->rowCount() == 0) {
-            $errors['quiz_id'] = 'Zvolený kvíz neexistuje!';
+            $errors['quiz_id'] = 'Zvolená otázka neexistuje!';
             $_GET['quiz_id'] = '';
         }
     } else {
-        $errors['quiz_id'] = 'Musíte vybrat kvíz.';
+        $errors['quiz_id'] = 'Musíte vybrat otázku.';
     }
 }
 ?>
@@ -64,13 +64,20 @@ if (!empty($_GET)) {
             <div class="row justify-content-center">
                 <div class="col-lg-8 col-md-8 col-sm-12">
                     <div class="form-box">
-                        <h1>Přidat otázku</h1>
-                        <form method="POST" action="php/add-question.php">
+                        <h1>Přidat odpověď</h1>
+                        <form method="POST" action="php/add-answer.php">
+                        <input type="hidden" id="question_id" name="question_id" value="<?= $_GET['question_id']; ?>">
                         <input type="hidden" id="quiz_id" name="quiz_id" value="<?= $_GET['quiz_id']; ?>">
+                           
                             <div class="item-box">
-                                <label for="question">*Otázka</label>
-                                <input type="text" id="question" name="question" required="">
+                                <label for="answer">*Odpověď:</label>
+                                <input type="text" id="answer" name="answer" required="">
+                                <select name="answer_correct" id="answer_correct" required class="form-control">
+                                    <option value="0">Špatně</option>
+                                    <option value="1">Správně</option>
+                                </select>
                             </div>
+                           
                             <button type="submit" id="submit">
                                 <span></span>
                                 <span></span>

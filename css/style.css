@@ -2,7 +2,7 @@
 /* IMPORT */
 /* LOGIN */
 .form-box {
-  width: 400px;
+  min-width: 400px;
   padding: 40px;
   background: white;
   -webkit-box-sizing: border-box;
@@ -222,6 +222,11 @@ header {
   z-index: 100;
   -webkit-box-shadow: 0 -1px 25px rgba(0, 0, 0, 0.6);
           box-shadow: 0 -1px 25px rgba(0, 0, 0, 0.6);
+  color: black !important;
+}
+
+button {
+  color: black !important;
 }
 
 .nav-dropdown {
@@ -230,6 +235,7 @@ header {
   z-index: 1;
   -webkit-box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
           box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+  color: black;
 }
 
 .logo-bar {
@@ -244,7 +250,7 @@ header {
 }
 
 .dropdown-menu a {
-  color: white;
+  color: black !important;
 }
 
 .dropdown-menu a:hover {
@@ -436,6 +442,10 @@ header .container .row {
 .page-wrapper {
   margin-left: 200px;
   position: relative;
+}
+
+.form-box {
+  max-width: 800px !important;
 }
 
 /* PROFILE */

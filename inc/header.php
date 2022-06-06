@@ -20,7 +20,7 @@ session_start();
             Příhlásit se
           </a>
         <?php else : ?>
-          <button class="btn text-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          <button class="btn text-text-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
             <?= $_SESSION['user_name'] ?>
           </button>
           

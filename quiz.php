@@ -2,9 +2,7 @@
 
 $json = file_get_contents("json/data.json");
 
-if($json == null) {
-  echo "fawgawg";
-}
+
 
 
 ?>
@@ -52,11 +50,11 @@ if($json == null) {
       <div class="container-quiz">
         <div id="question-container" class="hide">
           <div id="question">Bohužel žádná otázka tu není</div>
-          <div id="answer-buttons" class="d-flex flex-wrap justify-content-between">
-            <button class="btn btn-transit">Answer 1</button>
-            <button class="btn btn-transit">Answer 2</button>
-            <button class="btn btn-transit">Answer 3</button>
-            <button class="btn btn--transit">Answer 4</button>
+          <div id="answer-buttons" class="d-flex flex-wrap">
+            <button class="btn btn-transit m-1">Answer 1</button>
+            <button class="btn btn-transit m-1">Answer 2</button>
+            <button class="btn btn-transit m-1">Answer 3</button>
+            <button class="btn btn-transit m-1">Answer 4</button>
           </div>
         </div>
         <div class="controls">
@@ -82,6 +80,7 @@ if($json == null) {
     })
 
     function startGame() {
+      
       startButton.classList.add('hide')
       shuffledQuestions = questions.sort(() => Math.random() - .5)
       currentQuestionIndex = 0
@@ -101,6 +100,7 @@ if($json == null) {
         button.innerText = answer.answer
         button.classList.add('btn-transit')
         button.classList.add('btn')
+        button.classList.add('m-1')
         if (answer.correct == 1) {
           button.dataset.correct = answer.correct
         }
@@ -146,11 +146,10 @@ if($json == null) {
       element.classList.remove('wrong')
     }
 
+ 
+  
+    const questions = <?= $json ?>;
 
-
-    const questions = [
-      <?= $json ?>
-    ]
   </script>
 </body>
 
