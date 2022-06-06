@@ -2,9 +2,6 @@
 
 $json = file_get_contents("json/data.json");
 
-
-
-
 ?>
 
 <!DOCTYPE html>

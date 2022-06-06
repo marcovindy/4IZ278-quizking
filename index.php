@@ -14,7 +14,6 @@ if (!isset($_GET['categories'])) {
 
     $query = $db->query("SELECT quizzes.* FROM quizzes ORDER BY quizzes.quiz_created DESC");
     $quizzes = $query->fetchAll(PDO::FETCH_ASSOC);
-    
 } elseif (isset($_GET['categories'])) {
     $query = 'SELECT
                            quizzes.* 
@@ -136,6 +135,9 @@ if (!isset($_GET['categories'])) {
                                             <div class="col-8">
                                                 <span class="m-0">
                                                     <?= htmlspecialchars($quiz['quiz_title']); ?>
+                                                    <?php if ($quiz['quiz_verified'] == 1) : ?>
+                                                        <i class="fa fa-coins"></i>
+                                                    <?php endif; ?>
                                                 </span>
                                             </div>
                                             <div class="col-4">
