@@ -114,7 +114,7 @@ $numOfCat = 0;
                                                 <?php $numOfCat = count($categories); ?>
                                                 <label class="pr-3">
                                                     <input type="checkbox" name="categories[]" value="<?php echo $category['category_name']; ?>" id="<?php echo $category['category_name']; ?>" />
-                                                    <?php echo $category['category_name']; ?>
+                                                    <?php echo htmlspecialchars($category['category_name']); ?>
                                                 </label>
                                             <?php endforeach; ?>
                                         <?php endif; ?>
@@ -185,6 +185,7 @@ $numOfCat = 0;
             </div>
         </div>
     </div>
+    <?php require_once('inc/footer.php'); ?>
 </body>
 
 </html>

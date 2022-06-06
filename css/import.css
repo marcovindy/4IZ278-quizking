@@ -388,7 +388,7 @@ a.hyper-item:hover span {
 /* SIDEBAR */
 .sidebar {
   width: 200px;
-  min-height: 100vh;
+  min-height: calc(100vh - 54px);
   display: block;
   background: white;
   position: absolute;
@@ -494,5 +494,11 @@ header .container .row {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+}
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
 }
 /*# sourceMappingURL=import.css.map */

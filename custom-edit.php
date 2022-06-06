@@ -88,6 +88,7 @@ $questions = $query->fetchAll(PDO::FETCH_ASSOC);
                     <div class="form-box">
                         <h1>Upravit kvíz</h1>
                         <form method="POST" action="php/edit-quiz.php">
+                            <input type="text" id="quiz_id" name="quiz_id" value="<?= $_POST['quiz_id'] ?>" hidden>
                             <div class="item-box">
                                 <label for="quiz_title">Název kvízu</label>
                                 <input type="text" id="quiz_title" name="quiz_title" required="">
@@ -167,7 +168,7 @@ $questions = $query->fetchAll(PDO::FETCH_ASSOC);
             </div>
         </div>
     </div>
-
+    <?php require_once('inc/footer.php'); ?>
 </body>
 
 </html>

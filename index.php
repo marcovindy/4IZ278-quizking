@@ -14,6 +14,7 @@ if (!isset($_GET['categories'])) {
 
     $query = $db->query("SELECT quizzes.* FROM quizzes ORDER BY quizzes.quiz_created DESC");
     $quizzes = $query->fetchAll(PDO::FETCH_ASSOC);
+    
 } elseif (isset($_GET['categories'])) {
     $query = 'SELECT
                            quizzes.* 
@@ -93,7 +94,7 @@ if (!isset($_GET['categories'])) {
                             if ($numOfCat == count($names)) {
                                 $text = "<h2>Všechny kvízy</h2>";
                             }
-                            echo $text;
+                            echo htmlspecialchars($text);
                         }
                         ?>
 
@@ -109,7 +110,7 @@ if (!isset($_GET['categories'])) {
                                                 <?php $numOfCat = count($categories); ?>
                                                 <label class="pr-3">
                                                     <input type="checkbox" name="categories[]" value="<?php echo $category['category_name']; ?>" id="<?php echo $category['category_name']; ?>" />
-                                                    <?php echo $category['category_name']; ?>
+                                                    <?= htmlspecialchars($category['category_name']); ?>
                                                 </label>
                                             <?php endforeach; ?>
                                         <?php endif; ?>
@@ -159,6 +160,7 @@ if (!isset($_GET['categories'])) {
             </div>
         </div>
     </div>
+    <?php require_once('inc/footer.php'); ?>
 </body>
 
 </html>

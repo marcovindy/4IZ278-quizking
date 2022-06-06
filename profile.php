@@ -57,11 +57,11 @@
                         </div>
                         <div class="card-body text-center">
                             <div class="img-box m-auto">
-                                <img src="img/users/5.jpg" class="rounded-circle" width="150">
+                                <img src="img/placeholder.png" width="200px" class="rounded-circle" width="150">
                             </div>
 
                             <h4 class="card-title m-t-10"><?= $_SESSION['user_name'] ?></h4>
-                            <h6 class="card-subtitle">Zkušenosti <?= $exps; ?></h6>
+                            <h6 class="card-subtitle">Zkušenosti <?= htmlspecialchars($exps); ?></h6>
                             <div class="row text-center justify-content-md-center">
                                 <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-people"></i>
 
@@ -85,7 +85,7 @@
                             <h6>Počet mincí</h6>
                         </div>
                         <div class="card-body d-flex justify-content-center ">
-                            <p class="d-block m-auto fs-1"><?= $coins; ?></p>
+                            <p class="d-block m-auto fs-1"><?= htmlspecialchars($coins); ?></p>
                         </div>
                     </div>
                 </div>
@@ -102,8 +102,8 @@
                         $users = $query->fetchAll(PDO::FETCH_ASSOC);
                         foreach ($users as $user) {
                             echo '<div class="row text-center justify-content-center">';
-                            echo '<div class="col"><p>jmeno: ' . $user['user_name'] . '</p></div>';
-                            echo '<div class="col"><p>exp: ' . $user['user_exp'] . '</p></div>';
+                            echo '<div class="col"><p>jmeno: ' . htmlspecialchars($user['user_name']) . '</p></div>';
+                            echo '<div class="col"><p>exp: ' . htmlspecialchars($user['user_exp']) . '</p></div>';
                             echo '</div>';
                         }
                         ?>
@@ -114,7 +114,7 @@
         </div>
     </div>
 
-
+    <?php require_once('inc/footer.php'); ?>
 </body>
 
 </html>

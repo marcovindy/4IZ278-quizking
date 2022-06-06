@@ -151,6 +151,7 @@ $json = file_get_contents("json/data.json");
     const questions = <?= $json ?>;
 
   </script>
+    <?php require_once('inc/footer.php'); ?>
 </body>
 
 </html>

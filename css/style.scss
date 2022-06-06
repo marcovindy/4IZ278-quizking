@@ -3,6 +3,7 @@
 @import 'import/header';
 html {
   height: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -11,6 +12,7 @@ body {
   font-family: sans-serif;
   background: $bg-gradient;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .container-fluid {
@@ -229,5 +231,17 @@ header {
 .filter-box {
   form {
     justify-content: space-between;
+  }
+}
+
+
+footer {
+  background: $bg-transit;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  p {
+    margin: 0 !important;
+    padding: 2px;
   }
 }
