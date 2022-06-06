@@ -1,43 +1,45 @@
 <?php
-
-
-require_once 'inc/user.php';
-
-if (!empty($_SESSION['user_id'])) {
-    //uživatel už je přihlášený, nemá smysl, aby se přihlašoval znovu
-    header('Location: index.php');
-    exit();
-}
-
-$errors = false;
-
-if (!empty($_POST)) {
-    #region zpracování formuláře
-    $userQuery = $db->prepare('SELECT * FROM users WHERE user_email=:user_email LIMIT 1;');
-    $userQuery->execute([
-        ':user_email' => trim($_POST['user_email'])
-    ]);
-    if ($user = $userQuery->fetch(PDO::FETCH_ASSOC)) {
-
-
-        if ($_POST['user_pwd'] == $user['user_pwd']) {
-            //heslo je platné => přihlásíme uživatele
-            $_SESSION['user_id'] = $user['user_id'];
-            $_SESSION['user_name'] = $user['user_name'];
-            $_SESSION['user_email'] = $user['user_email'];
-            $_SESSION['user_exp'] = $user['user_exp'];
-            $_SESSION['user_coins'] = $user['user_coins'];
-            header('Location: php/signin.php');
-            exit();
-        } else {
-            $errors['pwd'] = "Heslo nefunguje";
+$result = "";
+if ( !empty( $_POST ) ) {
+    $xml = simplexml_load_file( "quizking.8u.cz" );
+    if ( !empty( $xml->channel ) ) {
+        foreach ($xml->channel as $channel) {
+            if (!empty( $channel->item )) {
+                foreach ($channel->item as $item){
+                    $result .= '<a href="'. $item->link .'">' . htmlspecialchars($item->title). '</a><br/>';
+                }
+            }
         }
-    } else {
-        $errors['email'] = "Email";
     }
-    #endregion zpracování formuláře
+
 }
 
+$to = "vanm32@vse.cz";
+
+if ( !empty( $_POST['subject'] )) {
+    $subjectText = $_POST['subject'];
+} else {
+    $subjectText = "Neznámý předmět";
+}
+$subject = '=?UTF-8?B?' . base64_encode($subjectText) . '?=';
+$text = $_POST['text'];
+$msg = base64_encode($text);
+$headers  = "From: Marek Vaníček <test@mareksite.com>\r\n";
+$headers .= "Cc: Další člověk <mail@mail.com>\r\n"; 
+$headers .= "X-Sender: MarekSite <mail@mareksite.com>\r\n";
+$headers .= 'X-Mailer: PHP/' . phpversion() . "\r\n";
+$headers .= "X-Priority: 1\r\n";
+$headers .= "Return-Path: test@mareksite.com\r\n";
+$headers .= "MIME-Version: 1.0\r\n";
+$headers .= "Content-Type: text/html; charset=iso-8859-1\r\n";
+$headers .= 'Content-Type: text/plain; charset=utf-8' . "\r\n";
+$headers .= 'Content-Transfer-Encoding: base64';
+
+if ( mail($to, $subject, $msg, $headers) ) {
+    echo "<div>Zpráva se povedla odeslat.</div>";
+} else {
+    echo "<div>Zpráva se nepovedla odeslat.</div>";
+}
 
 ?>
 
