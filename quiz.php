@@ -49,13 +49,13 @@ $json = json_encode($arrayQ);
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="description" content="Rezbar">
-  <meta name="keywords" content="Rezbar, woodcurving, woodstatutes, wood, drevo, sochy, dekorace, motorovapila, motorovka">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="author" content="Marek Vaníček">
-  <title>QuizKing</title>
-  <link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+    <meta name="description" content="Tohle je kvizova aplikace vytvorena pro VSE">
+    <meta name="keywords" content="quiz, kviz, super, moc, husty, tagy">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Marek Vaníček">
+    <title>QuizKing</title>
+    <link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
 
   <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">

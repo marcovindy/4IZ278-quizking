@@ -35,9 +35,9 @@ if (!empty($_POST)) {
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Rezbar">
-    <meta name="keywords" content="Rezbar, woodcurving, woodstatutes, wood, drevo, sochy, dekorace, motorovapila, motorovka">
+<meta charset="UTF-8">
+    <meta name="description" content="Tohle je kvizova aplikace vytvorena pro VSE">
+    <meta name="keywords" content="quiz, kviz, super, moc, husty, tagy">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Marek Vaníček">
     <title>QuizKing</title>
