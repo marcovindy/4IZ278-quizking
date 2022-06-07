@@ -21,15 +21,15 @@ if (!empty($_POST)) {
             $headers .= 'Content-Transfer-Encoding: base64';
 
             if (mail($to, $subject, $msg, $headers)) {
-                $result = "<div class='fs-1'>Zpráva se povedla odeslat.</div>";
+                $result = "<div class='fs-3'>Zpráva se povedla odeslat.</div>";
             } else {
-                $result = "<div class='fs-1'>Zpráva se nepovedla odeslat.</div>";
+                $result = "<div class='fs-3'>Zpráva se nepovedla odeslat.</div>";
             }
         } else {
-            $result = "<div class='fs-1'>Musíte něco napsat do zprávy.</div>";
+            $result = "<div class='fs-3'>Musíte něco napsat do zprávy.</div>";
         }
     } else {
-        $result = "<div class='fs-1'>Nevyplněný předmět.</div>";
+        $result = "<div class='fs-3'>Nevyplněný předmět.</div>";
     }
 }
 
