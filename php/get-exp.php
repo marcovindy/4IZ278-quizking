@@ -10,11 +10,8 @@ session_start();
 $verified = 0;
 $newCoins = 1;
 $newExps = 10;
-$errors = [];
-
-
-
 $response = 0;
+
 if (!empty($_SESSION)) {
     if (!empty($_SESSION['user_id'])) {
         if (!empty($_POST)) {
