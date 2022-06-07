@@ -14,7 +14,6 @@ if (!isset($_GET['categories'])) {
 
     $query = $db->query("SELECT quizzes.* FROM quizzes ORDER BY quizzes.quiz_created DESC");
     $quizzes = $query->fetchAll(PDO::FETCH_ASSOC);
-    
 } elseif (isset($_GET['categories'])) {
     $query = 'SELECT
                            quizzes.* 
@@ -65,11 +64,10 @@ if (!isset($_GET['categories'])) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
 
-
-
 </head>
 
 <body>
+
     <?php require_once('inc/header.php'); ?>
 
     <?php require_once('inc/nav.php'); ?>
@@ -130,7 +128,7 @@ if (!isset($_GET['categories'])) {
                         <?php if (!empty($quizzes)) : ?>
                             <?php foreach ($quizzes as $quiz) : array_map('htmlentities', $quiz); ?>
                                 <?php $numOfCat = count($quizzes); ?>
-                                <a href="php/json.php?quiz_id=<?= $quiz['quiz_id'] ?>">
+                                <a href="quiz.php?quiz_id=<?= $quiz['quiz_id'] ?>">
                                     <div class="quiz p-3">
                                         <div class="row">
                                             <div class="col-8">

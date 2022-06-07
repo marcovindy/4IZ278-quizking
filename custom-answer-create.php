@@ -83,7 +83,7 @@ if (!empty($_GET)) {
                                 <span></span>
                                 <span></span>
                                 <span></span>
-                                Upravit
+                                Vytvořit
                             </button>
                         </form>
                     </div>

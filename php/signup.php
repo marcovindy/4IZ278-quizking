@@ -9,13 +9,6 @@ if (!empty($_POST)) {
   $userEmail = trim(@$_POST['user_email']);
   $userPwd = $_POST['user_pwd'];
 
-  if (empty($userName)) {
-    $errors['user_name'] = 'Musíte zadat své jméno či přezdívku.';
-  }
-
-  if (empty(strlen($userPwd) < 8)) {
-    $errors['user_password'] = 'Musíte zadat alespoň 8 znaků.';
-  }
 
   $pattern = '/^(?=.*[0-9])(?=.*[A-Z]).{8,20}$/';
   if (!(preg_match($pattern, $userPwd))) {
@@ -68,4 +61,4 @@ foreach ($errors as $error) {
   echo $error;
 }
 echo "Registrace se nezdařila";
-header("<refresh:3></refresh:3>; url=../registrace.php");
+header("refresh:3; url=../register.php");

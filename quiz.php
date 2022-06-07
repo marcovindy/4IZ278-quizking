@@ -1,10 +1,44 @@
 <?php
+require_once 'inc/db.php';
+require_once 'php/answers.php';
+require_once 'php/question.php';
 
-$json = file_get_contents("json/data.json");
+$errors = [];
+
+if (empty($_GET)) { # Pokud není hodnota v přenesena, tak ukaž problém
+  $errors['get'] = 'Tento kvíz není možné spustit. Kvíz není specifikován.';
+}
+
+$arrayA = array();  # Pole pro obejkty odpovědí
+$arrayQ = array();  # Pole pro objekty otázek
+$quiz_id = $_GET['quiz_id']; # Kvíz ID
+
+$query = $db->query('SELECT questions.* FROM questions WHERE questions.question_quiz_id="' . $quiz_id . '" ');
+
+while ($row = $query->fetch()) {
+  $query2 = $db->query('SELECT answers.* FROM answers JOIN questions ON questions.question_id=answers.question_id WHERE answers.question_id="' . $row['question_id'] . '"; ');
+
+  while ($row2 = $query2->fetch()) {
+    $idA = $row2['answer_id'];
+    $a = $row2['answer_answer'];
+    $correct = $row2['answer_correct'];
+    $answerObject = new Answer($idA, $a, $correct);
+    $arrayA[] = $answerObject;
+  }
+  $id = $row['question_id'];
+  $q = $row['question_question'];
+  $answer = $row['question_id'];
+  $questionObject = new Question($id, $q, $arrayA);
+  $arrayA = array();
+  $arrayQ[] = $questionObject;
+}
+
+if (empty($questionObject)) {
+  $errors['QandA'] = 'Nejsou zde žádné otázky.';
+}
 
 
-
-
+$json = json_encode($arrayQ);
 ?>
 
 <!DOCTYPE html>
@@ -48,22 +82,38 @@ $json = file_get_contents("json/data.json");
   <div class="page-wrapper">
     <div class="container-fluid d-flex justify-content-center">
       <div class="container-quiz">
+      <?php
+          if (!empty($errors)) {
+            echo '<div class="error-msg">';
+            foreach ($errors as $error) {
+              echo "<p>" . $error . "<p/>";
+              echo "<p>Budete automaticky přesměrování na domovskou stránku.</p>";
+              echo '<a class="btn btn-transit2" href="index.php">Jít na hlavní stránku</a>';
+            }
+            echo '</div>';
+            header( "refresh:2; url=../custom-quiz.php" ); 
+          } else {
+          ?>
         <div id="question-container" class="hide">
           <div id="question">Bohužel žádná otázka tu není</div>
           <div id="answer-buttons" class="d-flex flex-wrap">
-            <button class="btn btn-transit m-1">Answer 1</button>
-            <button class="btn btn-transit m-1">Answer 2</button>
-            <button class="btn btn-transit m-1">Answer 3</button>
-            <button class="btn btn-transit m-1">Answer 4</button>
+            <button class="btn btn-transit m-1">Není zde žádná otázka</button>
+            <button class="btn btn-transit m-1">Není zde žádná otázka</button>
+            <button class="btn btn-transit m-1">Není zde žádná otázka</button>
+            <button class="btn btn-transit m-1">Není zde žádná otázka</button>
           </div>
         </div>
         <div class="controls">
           <button id="start-btn" class="start-btn btn btn-transit">Start</button>
           <button id="next-btn" class="next-btn btn btn-transit hide">Next</button>
         </div>
+        <?php
+         }
+        ?>
       </div>
     </div>
   </div>
+
   <script>
     const startButton = document.getElementById('start-btn')
     const nextButton = document.getElementById('next-btn')
@@ -80,7 +130,7 @@ $json = file_get_contents("json/data.json");
     })
 
     function startGame() {
-      
+
       startButton.classList.add('hide')
       shuffledQuestions = questions.sort(() => Math.random() - .5)
       currentQuestionIndex = 0
@@ -146,12 +196,9 @@ $json = file_get_contents("json/data.json");
       element.classList.remove('wrong')
     }
 
- 
-  
     const questions = <?= $json ?>;
-
   </script>
-    <?php require_once('inc/footer.php'); ?>
+  <?php require_once('inc/footer.php'); ?>
 </body>
 
 </html>
