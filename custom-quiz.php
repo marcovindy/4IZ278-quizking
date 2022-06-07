@@ -106,15 +106,25 @@ $numOfCat = 0;
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <div class="filter-box">
                             <form class="d-flex" action="custom-quiz.php" method="get">
-                                <fieldset>
+                            <fieldset>
                                     <legend>Filtrovat kategorie</legend>
                                     <div class="d-flex">
                                         <?php if (!empty($categories)) : ?>
                                             <?php foreach ($categories as $category) : array_map('htmlentities', $category); ?>
+                                            <?php $checked = "" ?>
                                                 <?php $numOfCat = count($categories); ?>
+                                                <?php if (!empty($_GET)) : ?>
+                                                    <?php 
+                                                        foreach ($_GET['categories'] as $catFromGet ) {
+                                                            if ($catFromGet == $category['category_name']){
+                                                                $checked = "checked";
+                                                            }
+                                                        }
+                                                        ?>
+                                                <?php endif; ?>
                                                 <label class="pr-3">
-                                                    <input type="checkbox" name="categories[]" value="<?php echo $category['category_name']; ?>" id="<?php echo $category['category_name']; ?>" />
-                                                    <?php echo htmlspecialchars($category['category_name']); ?>
+                                                    <input type="checkbox" name="categories[]" <?= $checked ?> value="<?php echo $category['category_name']; ?>" id="<?php echo $category['category_name']; ?>" />
+                                                    <?= htmlspecialchars($category['category_name']); ?>
                                                 </label>
                                             <?php endforeach; ?>
                                         <?php endif; ?>
@@ -122,7 +132,7 @@ $numOfCat = 0;
                                 </fieldset>
                                 <fieldset>
                                     <button class="btn-transit btn" type="submit">Filter</button>
-                                    <button class="btn-transit2 btn" type="reset">Reset</button>
+                                    <a href="custom-quiz.php" class="btn-transit2 btn" type="reset">Reset</a>
                                 </fieldset>
                             </form>
 
