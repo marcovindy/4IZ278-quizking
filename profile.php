@@ -94,11 +94,11 @@
                 <div class="col-12">
                     <div class="card bg-transit h-100">
                         <div class="card-header">
-                            <h6>Žebříček</h6>
+                            <h6>Žebříček - TOP 3</h6>
                         </div>
 
                         <?php
-                        $query = $db->query('SELECT users.* FROM users ORDER BY users.user_exp DESC');
+                        $query = $db->query('SELECT users.* FROM users ORDER BY users.user_exp DESC LIMIT 3');
                         $users = $query->fetchAll(PDO::FETCH_ASSOC);
                         foreach ($users as $user) {
                             echo '<div class="row text-center justify-content-center">';

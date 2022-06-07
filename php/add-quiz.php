@@ -21,7 +21,6 @@ if (empty($_SESSION)) {
     ]);
     if ($categoryQuery->rowCount()==0){
         $errors['category']='Zvolená kategorie neexistuje!';
-        $_POST['category']='0';
     }
 
 }else{
@@ -31,17 +30,12 @@ if (empty($_SESSION)) {
 if (!empty($_SESSION['user_id'])) {
     $userId = $_SESSION['user_id'];
 
-    if (!empty($_POST)) {
+    if (!empty($_POST['quiz_title'])) {
 
         # zpracování formuláře
 
         $title = trim(@$_POST['quiz_title']);
         $cat = trim(@$_POST['category']);
-
-        # kontrola názvu
-        if (empty($title)) {
-            $errors['quiz_title'] = 'Musíte název kvízu.';
-        }
 
         if (empty($errors)) {
 
@@ -51,11 +45,19 @@ if (!empty($_SESSION['user_id'])) {
                 ':userID' => $userId,
                 ':category' => $cat
             ]);
-
-            header("Location: ../custom-quiz.php");
-            exit();
         }
+    } else {
+        $errors['quiz_title'] = 'Musíte zadat název kvízu.';
     }
 }
 
+if (empty($errors)) {
+    echo 'Kviz uspesne vytvoren.';
+}
+
+foreach ($errors as $error) {
+    echo $error;
+}
+
+header("refresh:2; url=../shop.php");
 ?>

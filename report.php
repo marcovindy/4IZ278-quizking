@@ -4,27 +4,32 @@ if (!empty($_POST)) {
     $to = "vanm32@vse.cz";
     if (!empty($_POST['subject'])) {
         $subjectText = $_POST['subject'];
-    } else {
-        $subjectText = "Neznámý předmět";
-    }
-    $subject = '=?UTF-8?B?' . base64_encode($subjectText) . '?=';
-    $text = $_POST['text'];
-    $msg = base64_encode($text);
-    $headers  = "From: Marek Vaníček <test@mareksite.com>\r\n";
-    $headers .= "Cc: Další člověk <mail@mail.com>\r\n";
-    $headers .= "X-Sender: MarekSite <mail@mareksite.com>\r\n";
-    $headers .= 'X-Mailer: PHP/' . phpversion() . "\r\n";
-    $headers .= "X-Priority: 1\r\n";
-    $headers .= "Return-Path: test@mareksite.com\r\n";
-    $headers .= "MIME-Version: 1.0\r\n";
-    $headers .= "Content-Type: text/html; charset=iso-8859-1\r\n";
-    $headers .= 'Content-Type: text/plain; charset=utf-8' . "\r\n";
-    $headers .= 'Content-Transfer-Encoding: base64';
+        if (!empty($_POST['text'])) {
 
-    if (mail($to, $subject, $msg, $headers)) {
-        $result = "<div>Zpráva se povedla odeslat.</div>";
+            $subject = '=?UTF-8?B?' . base64_encode($subjectText) . '?=';
+            $text = $_POST['text'];
+            $msg = base64_encode($text);
+            $headers  = "From: Marek Vaníček <test@mareksite.com>\r\n";
+            $headers .= "Cc: Další člověk <mail@mail.com>\r\n";
+            $headers .= "X-Sender: MarekSite <mail@mareksite.com>\r\n";
+            $headers .= 'X-Mailer: PHP/' . phpversion() . "\r\n";
+            $headers .= "X-Priority: 1\r\n";
+            $headers .= "Return-Path: test@mareksite.com\r\n";
+            $headers .= "MIME-Version: 1.0\r\n";
+            $headers .= "Content-Type: text/html; charset=iso-8859-1\r\n";
+            $headers .= 'Content-Type: text/plain; charset=utf-8' . "\r\n";
+            $headers .= 'Content-Transfer-Encoding: base64';
+
+            if (mail($to, $subject, $msg, $headers)) {
+                $result = "<div class='fs-1'>Zpráva se povedla odeslat.</div>";
+            } else {
+                $result = "<div class='fs-1'>Zpráva se nepovedla odeslat.</div>";
+            }
+        } else {
+            $result = "<div class='fs-1'>Musíte něco napsat do zprávy.</div>";
+        }
     } else {
-        $result = "<div>Zpráva se nepovedla odeslat.</div>";
+        $result = "<div class='fs-1'>Nevyplněný předmět.</div>";
     }
 }
 
@@ -35,7 +40,7 @@ if (!empty($_POST)) {
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="description" content="Tohle je kvizova aplikace vytvorena pro VSE">
     <meta name="keywords" content="quiz, kviz, super, moc, husty, tagy">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -89,7 +94,7 @@ if (!empty($_POST)) {
                             </div>
                             <?php
                             if ($result != "") {
-                                echo "<h3>".$result."</h3>";
+                                echo "<div>" . $result . "</div>";
                             }
                             ?>
                             <button type="submit" id="submit"> Odeslat report
@@ -106,4 +111,5 @@ if (!empty($_POST)) {
     </div>
     <?php require_once('inc/footer.php'); ?>
 </body>
+
 </html>
