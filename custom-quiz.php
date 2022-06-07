@@ -152,10 +152,10 @@ $numOfCat = 0;
                                             <div class="col-4 d-flex flex-column justify-content-center">
                                                 <span class="m-0">
                                                     <?= htmlspecialchars($quiz['quiz_title']); ?>
-                                                </span>
-                                                <?php if ($quiz['quiz_verified']) : ?>
+                                                    <?php if ($quiz['quiz_verified']) : ?>
                                                     <i class="fa fa-coins"></i>
                                                 <?php endif; ?>
+                                                </span>
                                             </div>
                                             <div class="col-4  d-flex  flex-column justify-content-center">
                                                 <span class="m-0">
