@@ -46,14 +46,16 @@ if (!empty($_POST)) {
       ':email' => $userEmail,
       ':password' => $userPwd
     ]);
-
+    
+    session_start();
     $_SESSION['user_id'] = $db->lastInsertId();
     $_SESSION['user_name'] = $userName;
     $_SESSION['user_email'] = $userEmail;
-    $_SESSION['user_exp'] = $exp;
-    $_SESSION['user_coins'] = $coins;
-
-    header('Location: ../index.php');
+    if (!empty($_SESSION)){
+      header('Location: ../index.php');
+    } else {
+      header('Location: ../login.php');
+    }
     exit();
   }
 }

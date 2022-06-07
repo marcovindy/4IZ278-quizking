@@ -38,7 +38,7 @@ if (!isset($_GET['categories'])) {
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="description" content="Tohle je kvizova aplikace vytvorena pro VSE">
     <meta name="keywords" content="quiz, kviz, super, moc, husty, tagy">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -128,41 +128,44 @@ if (!isset($_GET['categories'])) {
                         <?php if (!empty($quizzes)) : ?>
                             <?php foreach ($quizzes as $quiz) : array_map('htmlentities', $quiz); ?>
                                 <?php $numOfCat = count($quizzes); ?>
-                                
+
                                 <?php
                                 $ok = true;
-                                if ($quiz['quiz_price'] > 0){
+                                if ($quiz['quiz_price'] > 0) {
                                     $ok = false;
-                                    $queryBQ = $db->query('SELECT bought_quizzes.* FROM bought_quizzes;
+                                    if (!empty($_SESSION)) {
+
+                                        $queryBQ = $db->query('SELECT bought_quizzes.* FROM bought_quizzes;
                                                             ');
-                                    $BQ = $queryBQ->fetchAll(PDO::FETCH_ASSOC);
-                                    if (!empty($BQ)){
-                                        foreach ($BQ as $bq) {
-                                            if (($bq['user_id'] == $_SESSION['user_id']) && ($bq['quiz_id'] == $quiz['quiz_id'])){
-                                                $ok = true;
+                                        $BQ = $queryBQ->fetchAll(PDO::FETCH_ASSOC);
+                                        if (!empty($BQ)) {
+                                            foreach ($BQ as $bq) {
+                                                if (($bq['user_id'] == $_SESSION['user_id']) && ($bq['quiz_id'] == $quiz['quiz_id'])) {
+                                                    $ok = true;
+                                                }
                                             }
                                         }
-                                    } 
+                                    }
                                 }
                                 ?>
                                 <?php if ($ok) : ?>
-                                <a href="quiz.php?quiz_id=<?= $quiz['quiz_id'] ?>">
-                                    <div class="quiz p-3">
-                                        <div class="row">
-                                            <div class="col-8">
-                                                <span class="m-0">
-                                                    <?= htmlspecialchars($quiz['quiz_title']); ?>
-                                                </span>
+                                    <a href="quiz.php?quiz_id=<?= $quiz['quiz_id'] ?>">
+                                        <div class="quiz p-3">
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <span class="m-0">
+                                                        <?= htmlspecialchars($quiz['quiz_title']); ?>
+                                                    </span>
+                                                </div>
+                                                <div class="col-4">
+                                                    <span class="m-0">
+                                                        <?= htmlspecialchars($quiz['quiz_created']); ?>
+                                                    </span>
+                                                </div>
+
                                             </div>
-                                            <div class="col-4">
-                                                <span class="m-0">
-                                                    <?= htmlspecialchars($quiz['quiz_created']); ?>
-                                                </span>
-                                            </div>
-                                        
                                         </div>
-                                    </div>
-                                </a>
+                                    </a>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         <?php endif; ?>
