@@ -159,6 +159,7 @@ if (!isset($_GET['categories'])) {
         </div>
     </div>
     <?php require_once('inc/footer.php'); ?>
+
 </body>
 
 </html>

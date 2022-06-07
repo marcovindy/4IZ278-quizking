@@ -82,18 +82,19 @@ $json = json_encode($arrayQ);
   <div class="page-wrapper">
     <div class="container-fluid d-flex justify-content-center">
       <div class="container-quiz">
-      <?php
-          if (!empty($errors)) {
-            echo '<div class="error-msg">';
-            foreach ($errors as $error) {
-              echo "<p>" . $error . "<p/>";
-              echo "<p>Budete automaticky přesměrování na domovskou stránku.</p>";
-              echo '<a class="btn btn-transit2" href="index.php">Jít na hlavní stránku</a>';
-            }
-            echo '</div>';
-            header( "refresh:2; url=../custom-quiz.php" ); 
-          } else {
-          ?>
+     
+            <?php if (!empty($errors)) : ?>
+            <div class="error-msg">
+              <?php foreach ($errors as $error) : array_map('htmlentities', $errors); ?>
+              <?php header( "refresh:2; url=index.php" ) ?>
+              <p> <?= $error ?> </p>
+              <p>Budete automaticky přesměrování na domovskou stránku.</p>
+              <a class="btn btn-transit2" href="index.php">Jít na hlavní stránku</a>
+              <?php endforeach; ?>
+            </div>
+         
+            <?php else: ?>
+      
         <div id="question-container" class="hide">
           <div id="question">Bohužel žádná otázka tu není</div>
           <div id="answer-buttons" class="d-flex flex-wrap">
@@ -107,9 +108,7 @@ $json = json_encode($arrayQ);
           <button id="start-btn" class="start-btn btn btn-transit">Start</button>
           <button id="next-btn" class="next-btn btn btn-transit hide">Next</button>
         </div>
-        <?php
-         }
-        ?>
+        <?php endif; ?>
       </div>
     </div>
   </div>
@@ -198,6 +197,64 @@ $json = json_encode($arrayQ);
 
     const questions = <?= $json ?>;
   </script>
+
+<script>
+        $(document).ready(function () {            
+          $(".controls").on('click', '#start-btn', function () {
+           
+                // $.ajax({
+                //     url: 'get-exp.php',
+                //     type: 'POST',
+                //     data: {
+                //       'id': id,
+                //       'text': text
+                //     },
+                //     success: function (response) {
+                //         if (response == 1){
+                //             alert("Uživatel nedostal nic");
+                //         } else if (response == 2) {
+                //             alert("Uživatel dostal expy");
+                //         } else if (response == 3) {
+                //             alert("Uživatel dostal expy i coiny");
+                //         } else {
+                //             alert("Uživatel není přihlášen");
+                //         }
+                //     }
+                // });
+
+                var id = 3;
+                var text = "ahoj";
+
+
+                $.ajax({
+                    type: "POST",
+                    url: "php/get-exp.php",
+                    data: {
+                        id: id,
+                        text: text
+                    },
+                    cache: false,
+                    success: function (response) {
+                      if (response == 1){
+                            alert("Uživatel nedostal nic");
+                        } else if (response == 2) {
+                            alert("Uživatel dostal expy");
+                        } else if (response == 3) {
+                            alert("Uživatel dostal expy i coiny");
+                        } else {
+                            alert("Uživatel není přihlášen");
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr);
+                    }
+                });
+
+
+            });
+        });
+    </script>
+
   <?php require_once('inc/footer.php'); ?>
 </body>
 
