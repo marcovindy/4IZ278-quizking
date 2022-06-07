@@ -121,8 +121,9 @@ $questions = $query->fetchAll(PDO::FETCH_ASSOC);
                                         foreach ($categories as $category) {
                                             if ($categorySelected == $category['category_name']){
                                                 echo '<option selected value="' . $category['category_id'] . '">' . htmlspecialchars($category['category_name']) . '</option>';
+                                            }else {
+                                                echo '<option value="' . $category['category_id'] . '">' . htmlspecialchars($category['category_name']) . '</option>';
                                             }
-                                            echo '<option value="' . $category['category_id'] . '">' . htmlspecialchars($category['category_name']) . '</option>';
                                         }
                                     }
                                     ?>

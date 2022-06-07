@@ -37,6 +37,10 @@ if (empty($questionObject)) {
   $errors['QandA'] = 'Nejsou zde žádné otázky.';
 }
 
+if (!empty($errors)) {
+  header("refresh:2; url=index.php");
+}
+
 
 $json = json_encode($arrayQ);
 ?>
@@ -77,7 +81,6 @@ $json = json_encode($arrayQ);
 
 <body>
 
-
   <?php require_once('inc/header.php'); ?>
 
   <?php require_once('inc/nav.php'); ?>
@@ -86,13 +89,15 @@ $json = json_encode($arrayQ);
       <div class="container-quiz">
 
         <?php if (!empty($errors)) : ?>
+
           <div class="error-msg">
             <?php foreach ($errors as $error) : array_map('htmlentities', $errors); ?>
-              <?php header("refresh:2; url=index.php") ?>
+
               <p> <?= $error ?> </p>
               <p>Budete automaticky přesměrování na domovskou stránku.</p>
               <a class="btn btn-transit2" href="index.php">Jít na hlavní stránku</a>
             <?php endforeach; ?>
+
           </div>
 
         <?php else : ?>
@@ -129,7 +134,7 @@ $json = json_encode($arrayQ);
     const questionElement = document.getElementById('question')
     const answerButtonsElement = document.getElementById('answer-buttons')
     const pointsDiv = document.getElementById('points')
- 
+
 
     let shuffledQuestions, currentQuestionIndex, points, q;
 
@@ -137,7 +142,7 @@ $json = json_encode($arrayQ);
     nextButton.addEventListener('click', () => {
       currentQuestionIndex++
       setNextQuestion()
-    
+
     })
 
     function startGame() {
@@ -184,7 +189,7 @@ $json = json_encode($arrayQ);
 
     function selectAnswer(e) {
       const selectedButton = e.target
-    
+
       const correct = selectedButton.dataset.correct
       setStatusClass(document.body, correct)
       if (selectedButton.dataset.correct) {
@@ -199,7 +204,7 @@ $json = json_encode($arrayQ);
       } else {
         startButton.innerText = 'Restart'
         startButton.classList.remove('hide')
-        pointsDiv.innerHTML= 'Body: ' + points + " / " + q
+        pointsDiv.innerHTML = 'Body: ' + points + " / " + q
         points = 0
         q = 0
       }
@@ -240,26 +245,26 @@ $json = json_encode($arrayQ);
               $('#alert').removeClass('d-none');
               $('#alert').text("Uživatel nedostal žádné body zkušeností.");
               setTimeout(() => {
-                $('.alert').alert('close');
+                $('#alert').addClass('d-none');
               }, 3000);
             } else if (response == 2) {
-              
+
               $('#alert').removeClass('d-none');
               $('#alert').text("Dostal jsi expy!");
               setTimeout(() => {
-                $('.alert').alert('close');
+                $('#alert').addClass('d-none');
               }, 3000);
             } else if (response == 3) {
               $('#alert').removeClass('d-none');
               $('#alert').text("Dostal jsi body zkušeností a coiny.");
               setTimeout(() => {
-                $('.alert').alert('close');
+                $('#alert').addClass('d-none');
               }, 3000);
             } else {
               $('#alert').removeClass('d-none');
               $('#alert').text("Pro získání bodů zkušení se přihlaš.");
               setTimeout(() => {
-                $('.alert').alert('close');
+                $('#alert').addClass('d-none');
               }, 3000);
             }
           },
@@ -274,6 +279,7 @@ $json = json_encode($arrayQ);
   </script>
 
   <?php require_once('inc/footer.php'); ?>
+
 </body>
 
 </html>

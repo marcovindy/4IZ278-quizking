@@ -7,32 +7,35 @@ $query->execute();
 
 $categories = $query->fetchAll(PDO::FETCH_ASSOC);
 $numOfCat = 0;
-?>
 
-<?php
 if (!isset($_GET['categories'])) {
-
-    $query = $db->query("SELECT quizzes.* FROM quizzes ORDER BY quizzes.quiz_created DESC");
+    $query = $db->query("SELECT quizzes.* FROM quizzes WHERE quizzes.quiz_price>0 ORDER BY quizzes.quiz_created DESC");
     $quizzes = $query->fetchAll(PDO::FETCH_ASSOC);
 } elseif (isset($_GET['categories'])) {
     $query = 'SELECT
                            quizzes.* 
-                           FROM quizzes JOIN categories ON quizzes.quiz_category_id=categories.category_id WHERE ';
+                           FROM quizzes JOIN categories ON quizzes.quiz_category_id=categories.category_id WHERE quizzes.quiz_price>0 AND ( ';
     $names = $_GET['categories'];
     $temp = 0;
     for ($i = 0; $i < count($names) - 1; $i++) {
         $query .= 'categories.category_name="' . $names[$i] . '" OR ';
         $temp = $i + 1;
     }
-    $query .= 'categories.category_name="' . $names[$temp++] . '" ';
+    $query .= 'categories.category_name="' . $names[$temp++] . '" )';
     $query .= ' ORDER BY quizzes.quiz_created DESC;';
     $query = $db->query($query);
     $quizzes = $query->fetchAll(PDO::FETCH_ASSOC);
 }
 
+$queryBQ = $db->query('SELECT bought_quizzes.* FROM bought_quizzes;');
+$BQ = $queryBQ->fetchAll(PDO::FETCH_ASSOC);
+
+
+$ok = true;
+
+
+
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -66,10 +69,9 @@ if (!isset($_GET['categories'])) {
 
 </head>
 
+
 <body>
-
-    <?php require_once('inc/header.php'); ?>
-
+    <?php require_once('inc/header-unlog.php'); ?>
     <?php require_once('inc/nav.php'); ?>
 
     <div class="page-wrapper">
@@ -78,19 +80,19 @@ if (!isset($_GET['categories'])) {
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <?php if (!isset($_GET['categories'])) : ?>
-                            <h1>Všechny Kvízy</h1>
+                            <h1>Obchod s kvízy</h1>
                         <?php endif; ?>
 
                         <?php
                         if (isset($_GET['categories'])) {
                             $names = $_GET['categories'];
-                            $text = "<h1>Kvízy - kategorie: ";
+                            $text = "<h1>Obchod s kvízy - kategorie: ";
                             foreach ($names as $categoryName) {
-                                $text .= htmlspecialchars($categoryName) . "  ";
+                                $text .= $categoryName . "  ";
                             }
                             $text .= "</h1>";
                             if ($numOfCat == count($names)) {
-                                $text = "<h2>Všechny kvízy</h2>";
+                                $text = "<h1>Obchod s kvízy</h1>";
                             }
                             echo $text;
                         }
@@ -99,7 +101,7 @@ if (!isset($_GET['categories'])) {
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <div class="filter-box">
-                            <form class="d-flex" action="index.php" method="get">
+                            <form class="d-flex" action="shop.php" method="get">
                                 <fieldset>
                                     <legend>Filtrovat kategorie</legend>
                                     <div class="d-flex">
@@ -128,41 +130,38 @@ if (!isset($_GET['categories'])) {
                         <?php if (!empty($quizzes)) : ?>
                             <?php foreach ($quizzes as $quiz) : array_map('htmlentities', $quiz); ?>
                                 <?php $numOfCat = count($quizzes); ?>
-                                
+
                                 <?php
-                                $ok = true;
-                                if ($quiz['quiz_price'] > 0){
-                                    $ok = false;
-                                    $queryBQ = $db->query('SELECT bought_quizzes.* FROM bought_quizzes;
-                                                            ');
-                                    $BQ = $queryBQ->fetchAll(PDO::FETCH_ASSOC);
-                                    if (!empty($BQ)){
-                                        foreach ($BQ as $bq) {
-                                            if (($bq['user_id'] == $_SESSION['user_id']) && ($bq['quiz_id'] == $quiz['quiz_id'])){
-                                                $ok = true;
-                                            }
+                                if (!empty($BQ)) {
+                                    foreach ($BQ as $bq) {
+                                        if (($bq['user_id'] == $_SESSION['user_id']) && ($bq['quiz_id'] == $quiz['quiz_id'])) {
+                                            $ok = false;
                                         }
-                                    } 
+                                    }
                                 }
                                 ?>
                                 <?php if ($ok) : ?>
-                                <a href="quiz.php?quiz_id=<?= $quiz['quiz_id'] ?>">
-                                    <div class="quiz p-3">
-                                        <div class="row">
-                                            <div class="col-8">
+                                    <a href="#">
+                                        <div class="quiz p-3">
+                                            <div class="row">
+                                                <div class="col-5">
+                                                    <span class="m-0">
+                                                        <?= htmlspecialchars($quiz['quiz_title']); ?>
+                                                    </span>
+                                                </div>
+                                                <div class="col-4">
+                                                    <span class="m-0">
+                                                        <?= htmlspecialchars($quiz['quiz_created']); ?>
+                                                    </span>
+                                                </div>
+                                                <div class="col-3">
                                                 <span class="m-0">
-                                                    <?= htmlspecialchars($quiz['quiz_title']); ?>
+                                                    <?= htmlspecialchars($quiz['quiz_price']); ?> Mincí
                                                 </span>
                                             </div>
-                                            <div class="col-4">
-                                                <span class="m-0">
-                                                    <?= htmlspecialchars($quiz['quiz_created']); ?>
-                                                </span>
                                             </div>
-                                        
                                         </div>
-                                    </div>
-                                </a>
+                                    </a>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         <?php endif; ?>
@@ -180,7 +179,4 @@ if (!isset($_GET['categories'])) {
     </div>
     <?php require_once('inc/footer.php'); ?>
 
-
 </body>
-
-</html>

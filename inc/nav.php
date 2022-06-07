@@ -12,6 +12,11 @@
           <span></span><span></span>
         </a>
       </li>
+      <li class="mb-1">
+        <a href="shop.php" class="link-dark rounded hyper-item">Obchod
+          <span></span><span></span>
+        </a>
+      </li>
       <li class=" mb-1">
         <button class="w-100 text-left  btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
           Další možnosti
