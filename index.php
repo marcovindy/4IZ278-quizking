@@ -165,7 +165,10 @@ if (!isset($_GET['categories'])) {
                                             <div class="row">
                                                 <div class="col-8">
                                                     <span class="m-0">
-                                                        <?= htmlspecialchars($quiz['quiz_title']); ?>
+                                                        <?= htmlspecialchars($quiz['quiz_title']); ?> 
+                                                        <?php if ($quiz['quiz_verified']) : ?>
+                                                        <i class="fa fa-coins"></i>
+                                                        <?php endif; ?>
                                                     </span>
                                                 </div>
                                                 <div class="col-4">

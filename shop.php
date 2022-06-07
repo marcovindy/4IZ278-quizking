@@ -164,6 +164,9 @@ $BQ = $queryBQ->fetchAll(PDO::FETCH_ASSOC);
                                                 <div class="col-4">
                                                     <span class="m-0">
                                                         <?= htmlspecialchars($quiz['quiz_title']); ?>
+                                                        <?php if ($quiz['quiz_verified']) : ?>
+                                                        <i class="fa fa-coins"></i>
+                                                        <?php endif; ?>
                                                     </span>
                                                 </div>
                                                 <div class="col-4">
@@ -181,8 +184,7 @@ $BQ = $queryBQ->fetchAll(PDO::FETCH_ASSOC);
                                     <?php endif; ?>
                                 <?php endforeach; ?>
 
-                            <?php endif; ?>
-                            <?php if (empty($quizzes)) : ?>
+                            <?php else: ?>
                                 <h2>Zde bohužel nejsou žádné kvízy</h2>
 
                             <?php endif; ?>

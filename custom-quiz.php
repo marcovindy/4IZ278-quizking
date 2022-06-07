@@ -16,7 +16,7 @@ $numOfCat = 0;
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="description" content="Tohle je kvizova aplikace vytvorena pro VSE">
     <meta name="keywords" content="quiz, kviz, super, moc, husty, tagy">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -106,21 +106,21 @@ $numOfCat = 0;
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <div class="filter-box">
                             <form class="d-flex" action="custom-quiz.php" method="get">
-                            <fieldset>
+                                <fieldset>
                                     <legend>Filtrovat kategorie</legend>
                                     <div class="d-flex">
                                         <?php if (!empty($categories)) : ?>
                                             <?php foreach ($categories as $category) : array_map('htmlentities', $category); ?>
-                                            <?php $checked = "" ?>
+                                                <?php $checked = "" ?>
                                                 <?php $numOfCat = count($categories); ?>
                                                 <?php if (!empty($_GET)) : ?>
-                                                    <?php 
-                                                        foreach ($_GET['categories'] as $catFromGet ) {
-                                                            if ($catFromGet == $category['category_name']){
-                                                                $checked = "checked";
-                                                            }
+                                                    <?php
+                                                    foreach ($_GET['categories'] as $catFromGet) {
+                                                        if ($catFromGet == $category['category_name']) {
+                                                            $checked = "checked";
                                                         }
-                                                        ?>
+                                                    }
+                                                    ?>
                                                 <?php endif; ?>
                                                 <label class="pr-3">
                                                     <input type="checkbox" name="categories[]" <?= $checked ?> value="<?php echo $category['category_name']; ?>" id="<?php echo $category['category_name']; ?>" />
@@ -153,6 +153,9 @@ $numOfCat = 0;
                                                 <span class="m-0">
                                                     <?= htmlspecialchars($quiz['quiz_title']); ?>
                                                 </span>
+                                                <?php if ($quiz['quiz_verified']) : ?>
+                                                    <i class="fa fa-coins"></i>
+                                                <?php endif; ?>
                                             </div>
                                             <div class="col-4  d-flex  flex-column justify-content-center">
                                                 <span class="m-0">
