@@ -11,7 +11,7 @@ if (!empty($_GET)) {
         ]);
         
     } else {
-        $errors['question_id'] = 'Musíte vybrat kvíz.';
+        $errors['answer_id'] = 'Musíte vybrat odpoved.';
     }
 }
 

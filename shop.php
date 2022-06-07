@@ -8,6 +8,8 @@ $query->execute();
 $categories = $query->fetchAll(PDO::FETCH_ASSOC);
 $numOfCat = 0;
 
+$ok = true;
+
 if (!isset($_GET['categories'])) {
     $query = $db->query("SELECT quizzes.* FROM quizzes WHERE quizzes.quiz_price>0 ORDER BY quizzes.quiz_created DESC");
     $quizzes = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -29,10 +31,6 @@ if (!isset($_GET['categories'])) {
 
 $queryBQ = $db->query('SELECT bought_quizzes.* FROM bought_quizzes;');
 $BQ = $queryBQ->fetchAll(PDO::FETCH_ASSOC);
-
-
-$ok = true;
-
 
 
 ?>
@@ -71,8 +69,16 @@ $ok = true;
 
 
 <body>
-    <?php require_once('inc/header-unlog.php'); ?>
+    <?php require_once('inc/header.php'); ?>
     <?php require_once('inc/nav.php'); ?>
+
+    <?php
+    if (!empty($_SESSION)) {
+        $user = $_SESSION['user_id'];
+    } else {
+        $user = -1;
+    }
+    ?>
 
     <div class="page-wrapper">
         <div class="container-fluid">
@@ -125,26 +131,27 @@ $ok = true;
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <?php if (!empty($quizzes)) : ?>
-                            <?php foreach ($quizzes as $quiz) : array_map('htmlentities', $quiz); ?>
-                                <?php $numOfCat = count($quizzes); ?>
+                <?php if ($user != -1) : ?>
+                    <div class="row">
+                        <div class="col">
+                            <?php if (!empty($quizzes)) : ?>
 
-                                <?php
-                                if (!empty($BQ)) {
-                                    foreach ($BQ as $bq) {
-                                        if (($bq['user_id'] == $_SESSION['user_id']) && ($bq['quiz_id'] == $quiz['quiz_id'])) {
-                                            $ok = false;
+                                <?php foreach ($quizzes as $quiz) : array_map('htmlentities', $quiz); ?>
+                                    <?php $numOfCat = count($quizzes); ?>
+
+                                    <?php
+                                    if (!empty($BQ)) {
+                                        foreach ($BQ as $bq) {
+                                            if (($bq['user_id'] == $_SESSION['user_id']) && ($bq['quiz_id'] == $quiz['quiz_id'])) {
+                                                $ok = false;
+                                            }
                                         }
                                     }
-                                }
-                                ?>
-                                <?php if ($ok) : ?>
-                                    <a href="#">
+                                    ?>
+                                    <?php if ($ok) : ?>
                                         <div class="quiz p-3">
                                             <div class="row">
-                                                <div class="col-5">
+                                                <div class="col-4">
                                                     <span class="m-0">
                                                         <?= htmlspecialchars($quiz['quiz_title']); ?>
                                                     </span>
@@ -154,26 +161,34 @@ $ok = true;
                                                         <?= htmlspecialchars($quiz['quiz_created']); ?>
                                                     </span>
                                                 </div>
-                                                <div class="col-3">
-                                                <span class="m-0">
-                                                    <?= htmlspecialchars($quiz['quiz_price']); ?> Mincí
-                                                </span>
-                                            </div>
+                                                <div class="col-4 d-flex justify-content-center">
+                                                    <a href="php/buy.php?quiz_id=<?= $quiz['quiz_id'] ?>" id="shop-btn" class="btn btn-transit" class="m-0">
+                                                        <?= htmlspecialchars($quiz['quiz_price']); ?> Mincí
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
-                                    </a>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                        <?php if (empty($quizzes)) : ?>
-                            <h2>Zde bohužel nejsou žádné kvízy</h2>
-                        <?php endif; ?>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+
+                            <?php endif; ?>
+                            <?php if (empty($quizzes)) : ?>
+                                <h2>Zde bohužel nejsou žádné kvízy</h2>
+
+                            <?php endif; ?>
+
+
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-8 col-md-8 col-sm-12">
+                <?php endif; ?>
+
+                <?php if ($user == -1) : ?>
+                    <div class="row justify-content-center">
+                        <div class="col">
+                            <h2>Pro nákup kvízu se prosím <a href="login.php">přihlašte</a></h2>
+                        </div>
                     </div>
-                </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>
