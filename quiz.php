@@ -76,41 +76,50 @@ $json = json_encode($arrayQ);
 </head>
 
 <body>
+
+
   <?php require_once('inc/header.php'); ?>
 
   <?php require_once('inc/nav.php'); ?>
   <div class="page-wrapper">
-    <div class="container-fluid d-flex justify-content-center">
+    <div class="container-fluid d-flex justify-content-center ">
       <div class="container-quiz">
-     
-            <?php if (!empty($errors)) : ?>
-            <div class="error-msg">
-              <?php foreach ($errors as $error) : array_map('htmlentities', $errors); ?>
-              <?php header( "refresh:2; url=index.php" ) ?>
+
+        <?php if (!empty($errors)) : ?>
+          <div class="error-msg">
+            <?php foreach ($errors as $error) : array_map('htmlentities', $errors); ?>
+              <?php header("refresh:2; url=index.php") ?>
               <p> <?= $error ?> </p>
               <p>Budete automaticky přesměrování na domovskou stránku.</p>
               <a class="btn btn-transit2" href="index.php">Jít na hlavní stránku</a>
-              <?php endforeach; ?>
-            </div>
-         
-            <?php else: ?>
-      
-        <div id="question-container" class="hide">
-          <div id="question">Bohužel žádná otázka tu není</div>
-          <div id="answer-buttons" class="d-flex flex-wrap">
-            <button class="btn btn-transit m-1">Není zde žádná otázka</button>
-            <button class="btn btn-transit m-1">Není zde žádná otázka</button>
-            <button class="btn btn-transit m-1">Není zde žádná otázka</button>
-            <button class="btn btn-transit m-1">Není zde žádná otázka</button>
+            <?php endforeach; ?>
           </div>
-        </div>
-        <div class="controls">
-          <button id="start-btn" class="start-btn btn btn-transit">Start</button>
-          <button id="next-btn" class="next-btn btn btn-transit hide">Next</button>
-        </div>
+
+        <?php else : ?>
+
+          <div id="question-container" class="hide">
+            <div id="question">Bohužel žádná otázka tu není</div>
+            <div id="answer-buttons" class="d-flex flex-wrap">
+              <button class="btn btn-transit m-1">Není zde žádná otázka</button>
+              <button class="btn btn-transit m-1">Není zde žádná otázka</button>
+              <button class="btn btn-transit m-1">Není zde žádná otázka</button>
+              <button class="btn btn-transit m-1">Není zde žádná otázka</button>
+            </div>
+          </div>
+          <div class="controls">
+            <button id="start-btn" class="start-btn btn btn-transit">Start</button>
+            <button id="next-btn" class="next-btn btn btn-transit hide">Next</button>
+          </div>
+          <div class="points">
+            <p id="points"></p>
+          </div>
         <?php endif; ?>
       </div>
     </div>
+  </div>
+
+  <div id="alert" class="alert alert-primary m-3 d-none alert-msg" role="alert">
+    This is a primary alert—check it out!
   </div>
 
   <script>
@@ -119,17 +128,22 @@ $json = json_encode($arrayQ);
     const questionContainerElement = document.getElementById('question-container')
     const questionElement = document.getElementById('question')
     const answerButtonsElement = document.getElementById('answer-buttons')
+    const pointsDiv = document.getElementById('points')
+ 
 
-    let shuffledQuestions, currentQuestionIndex
+    let shuffledQuestions, currentQuestionIndex, points, q;
 
     startButton.addEventListener('click', startGame)
     nextButton.addEventListener('click', () => {
       currentQuestionIndex++
       setNextQuestion()
+    
     })
 
     function startGame() {
-
+      points = 0;
+      q = 0;
+      pointsDiv.innerHTML = ""
       startButton.classList.add('hide')
       shuffledQuestions = questions.sort(() => Math.random() - .5)
       currentQuestionIndex = 0
@@ -166,10 +180,17 @@ $json = json_encode($arrayQ);
       }
     }
 
+
+
     function selectAnswer(e) {
       const selectedButton = e.target
+    
       const correct = selectedButton.dataset.correct
       setStatusClass(document.body, correct)
+      if (selectedButton.dataset.correct) {
+        points += 1
+      }
+      q += 1
       Array.from(answerButtonsElement.children).forEach(button => {
         setStatusClass(button, button.dataset.correct)
       })
@@ -178,6 +199,9 @@ $json = json_encode($arrayQ);
       } else {
         startButton.innerText = 'Restart'
         startButton.classList.remove('hide')
+        pointsDiv.innerHTML= 'Body: ' + points + " / " + q
+        points = 0
+        q = 0
       }
     }
 
@@ -198,62 +222,56 @@ $json = json_encode($arrayQ);
     const questions = <?= $json ?>;
   </script>
 
-<script>
-        $(document).ready(function () {            
-          $(".controls").on('click', '#start-btn', function () {
-           
-                // $.ajax({
-                //     url: 'get-exp.php',
-                //     type: 'POST',
-                //     data: {
-                //       'id': id,
-                //       'text': text
-                //     },
-                //     success: function (response) {
-                //         if (response == 1){
-                //             alert("Uživatel nedostal nic");
-                //         } else if (response == 2) {
-                //             alert("Uživatel dostal expy");
-                //         } else if (response == 3) {
-                //             alert("Uživatel dostal expy i coiny");
-                //         } else {
-                //             alert("Uživatel není přihlášen");
-                //         }
-                //     }
-                // });
+  <script>
+    $(document).ready(function() {
+      $(".controls").on('click', '#start-btn', function() {
 
-                var id = 3;
-                var text = "ahoj";
+        var id = <?= $quiz_id ?>;
 
-
-                $.ajax({
-                    type: "POST",
-                    url: "php/get-exp.php",
-                    data: {
-                        id: id,
-                        text: text
-                    },
-                    cache: false,
-                    success: function (response) {
-                      if (response == 1){
-                            alert("Uživatel nedostal nic");
-                        } else if (response == 2) {
-                            alert("Uživatel dostal expy");
-                        } else if (response == 3) {
-                            alert("Uživatel dostal expy i coiny");
-                        } else {
-                            alert("Uživatel není přihlášen");
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        console.error(xhr);
-                    }
-                });
-
-
-            });
+        $.ajax({
+          type: "POST",
+          url: "php/get-exp.php",
+          data: {
+            id: id
+          },
+          cache: false,
+          success: function(response) {
+            if (response == 1) {
+              $('#alert').removeClass('d-none');
+              $('#alert').text("Uživatel nedostal žádné body zkušeností.");
+              setTimeout(() => {
+                $('.alert').alert('close');
+              }, 3000);
+            } else if (response == 2) {
+              
+              $('#alert').removeClass('d-none');
+              $('#alert').text("Dostal jsi expy!");
+              setTimeout(() => {
+                $('.alert').alert('close');
+              }, 3000);
+            } else if (response == 3) {
+              $('#alert').removeClass('d-none');
+              $('#alert').text("Dostal jsi body zkušeností a coiny.");
+              setTimeout(() => {
+                $('.alert').alert('close');
+              }, 3000);
+            } else {
+              $('#alert').removeClass('d-none');
+              $('#alert').text("Pro získání bodů zkušení se přihlaš.");
+              setTimeout(() => {
+                $('.alert').alert('close');
+              }, 3000);
+            }
+          },
+          error: function(xhr, status, error) {
+            console.error(xhr);
+          }
         });
-    </script>
+
+
+      });
+    });
+  </script>
 
   <?php require_once('inc/footer.php'); ?>
 </body>

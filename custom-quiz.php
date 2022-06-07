@@ -136,7 +136,7 @@ $numOfCat = 0;
                         <?php if (!empty($quizzes)) : ?>
                             <?php foreach ($quizzes as $quiz) : array_map('htmlentities', $quiz); ?>
                                 <?php $numOfCat = count($quizzes); ?>
-                                <a href="php/json.php?quiz_id=<?= $quiz['quiz_id'] ?>">
+                                <a href="quiz.php?quiz_id=<?= $quiz['quiz_id'] ?>">
                                     <div class="quiz p-3">
                                         <div class="row">
                                             <div class="col-4 d-flex flex-column justify-content-center">

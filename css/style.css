@@ -509,4 +509,12 @@ footer p {
   margin: 0 !important;
   padding: 2px;
 }
+
+/* Alert */
+.alert-msg {
+  position: absolute !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  z-index: 100;
+}
 /*# sourceMappingURL=style.css.map */

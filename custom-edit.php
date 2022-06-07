@@ -27,17 +27,33 @@ if (!empty($_POST)) {
 }
 
 
+$queryQuiz = 'SELECT
+                       quizzes.*
+                       FROM quizzes  WHERE quizzes.quiz_id="' . $_POST['quiz_id'] . '" LIMIT 1;';
+$queryQuiz = $db->query($queryQuiz);
+$quizzes = $queryQuiz->fetchAll(PDO::FETCH_ASSOC);
+
+
+foreach ($quizzes as $quiz) {
+    $quizTitle = $quiz['quiz_title'];
+    $quizCategory = $quiz['quiz_category_id'];
+}
+
+$queryCat = 'SELECT categories.* FROM categories WHERE categories.category_id="'.$quizCategory.'" ;';
+$queryCat = $db->query($queryCat);
+$categoriesOfQuiz = $queryCat->fetchAll(PDO::FETCH_ASSOC);
+foreach ($categoriesOfQuiz as $categoryOfQuiz) {
+    $categorySelected = $categoryOfQuiz['category_name'];
+}
+
+
 $query = 'SELECT
                        questions.*
                        FROM questions  WHERE questions.question_quiz_id="' . $_POST['quiz_id'] . '" ;';
 $query = $db->query($query);
 $questions = $query->fetchAll(PDO::FETCH_ASSOC);
 
-
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -91,7 +107,7 @@ $questions = $query->fetchAll(PDO::FETCH_ASSOC);
                             <input type="text" id="quiz_id" name="quiz_id" value="<?= $_POST['quiz_id'] ?>" hidden>
                             <div class="item-box">
                                 <label for="quiz_title">Název kvízu</label>
-                                <input type="text" id="quiz_title" name="quiz_title" required="">
+                                <input type="text" id="quiz_title" name="quiz_title" value="<?= htmlspecialchars($quizTitle) ?>" required>
                             </div>
                             <div class="item-box">
                                 <label for="category">Kategorie:</label>
@@ -103,6 +119,9 @@ $questions = $query->fetchAll(PDO::FETCH_ASSOC);
                                     $categories = $categoryQuery->fetchAll(PDO::FETCH_ASSOC);
                                     if (!empty($categories)) {
                                         foreach ($categories as $category) {
+                                            if ($categorySelected == $category['category_name']){
+                                                echo '<option selected value="' . $category['category_id'] . '">' . htmlspecialchars($category['category_name']) . '</option>';
+                                            }
                                             echo '<option value="' . $category['category_id'] . '">' . htmlspecialchars($category['category_name']) . '</option>';
                                         }
                                     }

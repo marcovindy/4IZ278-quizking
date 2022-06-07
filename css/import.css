@@ -260,6 +260,7 @@ button {
 
 html {
   height: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -269,6 +270,7 @@ body {
   background: -webkit-gradient(linear, left top, left bottom, from(#0E76BC), to(#25ABE2));
   background: linear-gradient(#0E76BC, #25ABE2);
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .container-fluid {
@@ -497,8 +499,21 @@ header .container .row {
 }
 
 footer {
+  background: white;
   position: fixed;
   left: 0;
+  bottom: 0;
+}
+
+footer p {
+  margin: 0 !important;
+  padding: 2px;
+}
+
+/* Alert */
+.alert-msg {
+  position: absolute;
+  right: 0;
   bottom: 0;
 }
 /*# sourceMappingURL=import.css.map */
