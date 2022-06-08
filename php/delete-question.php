@@ -9,20 +9,24 @@ if (!empty($_GET)) {
         $quizQuery->execute([
             ':question_id' => ($_GET['question_id'])
         ]);
-        
+        if (!empty($_GET['quiz_id'])) {
+            $quizId = $_GET['quiz_id'];
+        }
     } else {
         $errors['question_id'] = 'Musíte vybrat kvíz.';
     }
 }
 
-if(empty($errors)){
+if (empty($errors)) {
     echo 'Otázka úspěšně smazána.';
-  
 }
 
 foreach ($errors as $error) {
     echo $error;
 }
 
-header( "refresh:2; url=../custom-quiz.php" ); 
-
+if (!empty($_GET['question_id']) && !empty($_GET['quiz_id'])) {
+    header("refresh:2; url=../custom-edit.php?quiz_id=" . $quizId);
+} else {
+    header("refresh:2; url=../custom-quiz.php");
+}

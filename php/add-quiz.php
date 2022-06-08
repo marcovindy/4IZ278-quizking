@@ -59,5 +59,5 @@ foreach ($errors as $error) {
     echo $error;
 }
 
-header("refresh:2; url=../shop.php");
+header("refresh:2; url=../custom-quiz.php");
 ?>

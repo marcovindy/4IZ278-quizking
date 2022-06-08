@@ -162,7 +162,7 @@ $questions = $query->fetchAll(PDO::FETCH_ASSOC);
                                     <?php foreach ($answers as $a) : array_map('htmlentities', $a); ?>
                                         <div class="row">
                                             <div class="col-3">
-                                                <a href="php/delete-answer.php?answer_id=<?= $a['answer_id'] ?>&quiz_id=<?= $_POST['quiz_id'] ?>"  class="btn btn-transit2">Smazat</a>
+                                                <a href="php/delete-answer.php?answer_id=<?= $a['answer_id'] ?>&quiz_id=<?= $_POST['quiz_id'] ?>&category=<?= $_POST['quiz_id'] ?>"  class="btn btn-transit2">Smazat</a>
                                             </div>
                                             <div class="col-9">
                                                 <p>Odpověď: <?= htmlspecialchars($a['answer_answer']); ?>
