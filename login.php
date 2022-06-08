@@ -12,7 +12,6 @@ if (!empty($_SESSION['user_id'])) {
 $errors = false;
 
 if (!empty($_POST)) {
-    #region zpracování formuláře
     $userQuery = $db->prepare('SELECT * FROM users WHERE user_email=:user_email LIMIT 1;');
     $userQuery->execute([
         ':user_email' => trim($_POST['user_email'])
@@ -21,7 +20,6 @@ if (!empty($_POST)) {
 
 
         if ($_POST['user_pwd'] == $user['user_pwd']) {
-            //heslo je platné => přihlásíme uživatele
             $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['user_name'] = $user['user_name'];
             $_SESSION['user_email'] = $user['user_email'];
@@ -30,12 +28,14 @@ if (!empty($_POST)) {
             header('Location: php/signin.php');
             exit();
         } else {
-            $errors['pwd'] = "Heslo nefunguje";
+            $errors['pwd'] = "Heslo není správně.";
         }
     } else {
-        $errors['email'] = "Email";
+        $errors['email'] = "Uživatel s tímto emailem neexistuje.";
     }
-    #endregion zpracování formuláře
+    if (!empty($errors)) {
+
+    }
 }
 
 
@@ -96,6 +96,13 @@ if (!empty($_POST)) {
                                 <label for="user_pwd">Heslo</label>
                                 <input type="password" name="user_pwd" id="user_pwd" name="user_pwd" required="">
                             </div>
+                            <?php if (!empty($errors)) : ?>
+                            <div class="fs-3">
+                            <?php foreach ($errors as $error) : array_map('htmlentities', $errors); ?>
+                                <p><?= $error; ?></p>
+                            <?php endforeach; ?>
+                            </div>
+                            <?php endif; ?>
                             <button type="submit" id="submit"> Přihlásit se
                                 <span></span>
                                 <span></span>
