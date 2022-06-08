@@ -111,6 +111,7 @@ $numOfCat = 0;
                                     <div class="d-flex">
                                         <?php if (!empty($categories)) : ?>
                                             <?php foreach ($categories as $category) : array_map('htmlentities', $category); ?>
+                                          
                                                 <?php $checked = "" ?>
                                                 <?php $numOfCat = count($categories); ?>
                                                 <?php if (!empty($_GET)) : ?>
@@ -126,6 +127,7 @@ $numOfCat = 0;
                                                     <input type="checkbox" name="categories[]" <?= $checked ?> value="<?php echo $category['category_name']; ?>" id="<?php echo $category['category_name']; ?>" />
                                                     <?= htmlspecialchars($category['category_name']); ?>
                                                 </label>
+                                       
                                             <?php endforeach; ?>
                                         <?php endif; ?>
                                     </div>
@@ -153,17 +155,17 @@ $numOfCat = 0;
                                                 <span class="m-0">
                                                     <?= htmlspecialchars($quiz['quiz_title']); ?>
                                                     <?php if ($quiz['quiz_verified']) : ?>
-                                                    <i class="fa fa-coins"></i>
-                                                <?php endif; ?>
+                                                        <i title="Verifikovaný kvíz - můžete za něj dostat coiny" class="fa fa-coins"></i>
+                                                    <?php endif; ?>
                                                 </span>
                                             </div>
                                             <div class="col-4  d-flex  flex-column justify-content-center">
                                                 <span class="m-0">
-                                                <?php 
-                                                        $date = $quiz['quiz_created'];
-                                                        $date = new DateTime($date);
-                                                        echo htmlspecialchars($date->format('d/m/Y'));
-                                                        ?>
+                                                    <?php
+                                                    $date = $quiz['quiz_created'];
+                                                    $date = new DateTime($date);
+                                                    echo htmlspecialchars($date->format('d/m/Y'));
+                                                    ?>
                                                 </span>
                                             </div>
                                             <div class="col-4 d-flex justify-content-center">
@@ -183,7 +185,7 @@ $numOfCat = 0;
                         <?php endif; ?>
                         <?php if (empty($quizzes)) : ?>
                             <?php if ($user != -1) : ?>
-                                <div class="fs-3">Zde bohužel nejsou žádné kvízy</h2>
+                                <div class="fs-3">Zde bohužel nejsou žádné kvízy</div>
                             <?php else : ?>
                                 <div class="fs-3">Pro vytvoření vlastního kvízu se prosím <a href="login.php">přihlašte</a></div>
                             <?php endif; ?>

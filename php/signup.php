@@ -12,7 +12,7 @@ if (!empty($_POST)) {
 
   $pattern = '/^(?=.*[0-9])(?=.*[A-Z]).{8,20}$/';
   if (!(preg_match($pattern, $userPwd))) {
-    $errors['user_password'] = 'Musí mít minimálně 1 číslici z minimálních 8 znaků.';
+    $errors['user_password'] = 'Heslo musí mít minimálně 1 číslici z minimálních 8 znaků.';
   }
 
   if (!filter_var($userEmail, FILTER_VALIDATE_EMAIL)) {
@@ -46,21 +46,32 @@ if (!empty($_POST)) {
       ':email' => $userEmail,
       ':password' => $userPwd
     ]);
-    
+
     session_start();
     $_SESSION['user_id'] = $db->lastInsertId();
     $_SESSION['user_name'] = $userName;
     $_SESSION['user_email'] = $userEmail;
-    if (!empty($_SESSION)){
-      header('Location: ../index.php');
+    if (!empty($_SESSION)) {
+      header("refresh:3; url=../index.php");
+      echo "<div class='fs-3'>";
+      echo "Registrace se zdařila, budete automaticky přihlášeni.";
+      "</div>";
     } else {
-      header('Location: ../login.php');
+      header("refresh:3; url=../register.php");
     }
     exit();
+  } else {
+
+    echo "<div>";
+    foreach ($errors as $error) {
+      echo "<p>" . $error . "</p>";
+    }
+    echo "</div>";
+    header("refresh:4; url=../register.php");
   }
+} else {
+  echo "<div class='fs-3'>";
+  echo "Registrace se nezdařila, budete automaticky přesměrování zpět.";
+  echo "</div>";
+  header("refresh:3; url=../register.php");
 }
-foreach ($errors as $error) {
-  echo $error;
-}
-echo "Registrace se nezdařila";
-header("refresh:3; url=../register.php");

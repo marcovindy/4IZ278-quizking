@@ -167,7 +167,7 @@ if (!isset($_GET['categories'])) {
                                                     <span class="m-0">
                                                         <?= htmlspecialchars($quiz['quiz_title']); ?> 
                                                         <?php if ($quiz['quiz_verified']) : ?>
-                                                        <i class="fa fa-coins"></i>
+                                                        <i title="Verifikovaný kvíz - můžete za něj dostat coiny" class="fa fa-coins"></i>
                                                         <?php endif; ?>
                                                     </span>
                                                 </div>
@@ -188,7 +188,7 @@ if (!isset($_GET['categories'])) {
                             <?php endforeach; ?>
                         <?php endif; ?>
                         <?php if (empty($quizzes)) : ?>
-                            <div class="fs-3">Zde bohužel nejsou žádné kvízy</h2>
+                            <div class="fs-3">Zde bohužel nejsou žádné kvízy</div>
                         <?php endif; ?>
                     </div>
                 </div>
