@@ -52,7 +52,7 @@ if (!empty($_GET)) {
             }
         }
     }
-    header("refresh:2; url=../edit-quiz.php?quiz_id=".$quizId);
+    header("refresh:2; url=../custom-edit.php?quiz_id=".$quizId);
 }else{
     header("refresh:2; url=../custom-quiz.php");
 }
