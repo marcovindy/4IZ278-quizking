@@ -159,7 +159,11 @@ $numOfCat = 0;
                                             </div>
                                             <div class="col-4  d-flex  flex-column justify-content-center">
                                                 <span class="m-0">
-                                                    <?= htmlspecialchars($quiz['quiz_created']); ?>
+                                                <?php 
+                                                        $date = $quiz['quiz_created'];
+                                                        $date = new DateTime($date);
+                                                        echo htmlspecialchars($date->format('d/m/Y'));
+                                                        ?>
                                                 </span>
                                             </div>
                                             <div class="col-4 d-flex justify-content-center">
@@ -179,9 +183,9 @@ $numOfCat = 0;
                         <?php endif; ?>
                         <?php if (empty($quizzes)) : ?>
                             <?php if ($user != -1) : ?>
-                                <h2>Zde bohužel nejsou žádné kvízy</h2>
+                                <div class="fs-3">Zde bohužel nejsou žádné kvízy</h2>
                             <?php else : ?>
-                                <h2>Pro vytvoření vlastního kvízu se prosím <a href="login.php">přihlašte</a></h2>
+                                <div class="fs-3">Pro vytvoření vlastního kvízu se prosím <a href="login.php">přihlašte</a></div>
                             <?php endif; ?>
                         <?php endif; ?>
                     </div>

@@ -7,7 +7,7 @@ $query->execute();
 
 $categories = $query->fetchAll(PDO::FETCH_ASSOC);
 $numOfCat = 0;
-
+$counter = 0;
 $ok = true;
 
 if (!isset($_GET['categories'])) {
@@ -39,7 +39,7 @@ $BQ = $queryBQ->fetchAll(PDO::FETCH_ASSOC);
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="description" content="Tohle je kvizova aplikace vytvorena pro VSE">
     <meta name="keywords" content="quiz, kviz, super, moc, husty, tagy">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -108,21 +108,21 @@ $BQ = $queryBQ->fetchAll(PDO::FETCH_ASSOC);
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <div class="filter-box">
                             <form class="d-flex" action="shop.php" method="get">
-                            <fieldset>
+                                <fieldset>
                                     <legend>Filtrovat kategorie</legend>
                                     <div class="d-flex">
                                         <?php if (!empty($categories)) : ?>
                                             <?php foreach ($categories as $category) : array_map('htmlentities', $category); ?>
-                                            <?php $checked = "" ?>
+                                                <?php $checked = "" ?>
                                                 <?php $numOfCat = count($categories); ?>
                                                 <?php if (!empty($_GET)) : ?>
-                                                    <?php 
-                                                        foreach ($_GET['categories'] as $catFromGet ) {
-                                                            if ($catFromGet == $category['category_name']){
-                                                                $checked = "checked";
-                                                            }
+                                                    <?php
+                                                    foreach ($_GET['categories'] as $catFromGet) {
+                                                        if ($catFromGet == $category['category_name']) {
+                                                            $checked = "checked";
                                                         }
-                                                        ?>
+                                                    }
+                                                    ?>
                                                 <?php endif; ?>
                                                 <label class="pr-3">
                                                     <input type="checkbox" name="categories[]" <?= $checked ?> value="<?php echo $category['category_name']; ?>" id="<?php echo $category['category_name']; ?>" />
@@ -145,65 +145,74 @@ $BQ = $queryBQ->fetchAll(PDO::FETCH_ASSOC);
                     <div class="row">
                         <div class="col">
                             <?php if (!empty($quizzes)) : ?>
-
+                                <?php $numOfQ = count($quizzes); ?>
                                 <?php foreach ($quizzes as $quiz) : array_map('htmlentities', $quiz); ?>
-                                    <?php $numOfCat = count($quizzes); ?>
+
 
                                     <?php
                                     if (!empty($BQ)) {
                                         foreach ($BQ as $bq) {
                                             if (($bq['user_id'] == $_SESSION['user_id']) && ($bq['quiz_id'] == $quiz['quiz_id'])) {
                                                 $ok = false;
+                                                $counter += 1;
                                             }
                                         }
                                     }
                                     ?>
-                                    <?php if ($ok) : ?>
-                                        <div class="quiz p-3">
-                                            <div class="row">
-                                                <div class="col-4">
-                                                    <span class="m-0">
-                                                        <?= htmlspecialchars($quiz['quiz_title']); ?>
-                                                        <?php if ($quiz['quiz_verified']) : ?>
-                                                        <i class="fa fa-coins"></i>
-                                                        <?php endif; ?>
-                                                    </span>
+                                    <?php if ($counter == $numOfQ) : ?>
+                                        <div class="fs-3">Zde bohužel nejsou žádné kvízy</h2>
+                                        <?php endif; ?>
+                                        <?php if ($ok) : ?>
+
+                                            <div class="quiz p-3">
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <span class="m-0">
+                                                            <?= htmlspecialchars($quiz['quiz_title']); ?>
+                                                            <?php if ($quiz['quiz_verified']) : ?>
+                                                                <i class="fa fa-coins"></i>
+                                                            <?php endif; ?>
+                                                        </span>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <span class="m-0">
+                                                            <?php
+                                                            $date = $quiz['quiz_created'];
+                                                            $date = new DateTime($date);
+                                                            echo htmlspecialchars($date->format('d/m/Y'));
+                                                            ?>
+                                                        </span>
+                                                    </div>
+                                                    <div class="col-4 d-flex justify-content-center">
+                                                        <a href="php/buy.php?quiz_id=<?= $quiz['quiz_id'] ?>" id="shop-btn" class="btn btn-transit" class="m-0">
+                                                            <?= htmlspecialchars($quiz['quiz_price']); ?> Mincí
+                                                        </a>
+                                                    </div>
                                                 </div>
-                                                <div class="col-4">
-                                                    <span class="m-0">
-                                                        <?= htmlspecialchars($quiz['quiz_created']); ?>
-                                                    </span>
-                                                </div>
-                                                <div class="col-4 d-flex justify-content-center">
-                                                    <a href="php/buy.php?quiz_id=<?= $quiz['quiz_id'] ?>" id="shop-btn" class="btn btn-transit" class="m-0">
-                                                        <?= htmlspecialchars($quiz['quiz_price']); ?> Mincí
-                                                    </a>
-                                                </div>
+                                            </div>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+
+                                <?php else : ?>
+                                    <div class="fs-3">Zde bohužel nejsou žádné kvízy</h2>
+
+                                    <?php endif; ?>
+
+
+                                    </div>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <?php if ($user == -1) : ?>
+                                        <div class="row justify-content-center">
+                                            <div class="col">
+                                                <div class="fs-3">Pro nákup kvízu se prosím <a href="login.php">přihlašte</a></div>
                                             </div>
                                         </div>
                                     <?php endif; ?>
-                                <?php endforeach; ?>
-
-                            <?php else: ?>
-                                <h2>Zde bohužel nejsou žádné kvízy</h2>
-
-                            <?php endif; ?>
-
-
                         </div>
                     </div>
-                <?php endif; ?>
-
-                <?php if ($user == -1) : ?>
-                    <div class="row justify-content-center">
-                        <div class="col">
-                            <h2>Pro nákup kvízu se prosím <a href="login.php">přihlašte</a></h2>
-                        </div>
-                    </div>
-                <?php endif; ?>
             </div>
-        </div>
-    </div>
-    <?php require_once('inc/footer.php'); ?>
+            <?php require_once('inc/footer.php'); ?>
 
 </body>

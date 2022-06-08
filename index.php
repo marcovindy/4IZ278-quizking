@@ -173,7 +173,11 @@ if (!isset($_GET['categories'])) {
                                                 </div>
                                                 <div class="col-4">
                                                     <span class="m-0">
-                                                        <?= htmlspecialchars($quiz['quiz_created']); ?>
+                                                        <?php 
+                                                        $date = $quiz['quiz_created'];
+                                                        $date = new DateTime($date);
+                                                        echo htmlspecialchars($date->format('d/m/Y'));
+                                                        ?>
                                                     </span>
                                                 </div>
 
@@ -184,7 +188,7 @@ if (!isset($_GET['categories'])) {
                             <?php endforeach; ?>
                         <?php endif; ?>
                         <?php if (empty($quizzes)) : ?>
-                            <h2>Zde bohužel nejsou žádné kvízy</h2>
+                            <div class="fs-3">Zde bohužel nejsou žádné kvízy</h2>
                         <?php endif; ?>
                     </div>
                 </div>
