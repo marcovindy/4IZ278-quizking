@@ -41,7 +41,6 @@ if (!empty($errors)) {
   header("refresh:2; url=index.php");
 }
 
-
 $json = json_encode($arrayQ);
 ?>
 
@@ -49,13 +48,13 @@ $json = json_encode($arrayQ);
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-    <meta name="description" content="Tohle je kvizova aplikace vytvorena pro VSE">
-    <meta name="keywords" content="quiz, kviz, super, moc, husty, tagy">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Marek Vaníček">
-    <title>QuizKing</title>
-    <link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
+  <meta charset="UTF-8">
+  <meta name="description" content="Tohle je kvizova aplikace vytvorena pro VSE">
+  <meta name="keywords" content="quiz, kviz, super, moc, husty, tagy">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Marek Vaníček">
+  <title>QuizKing</title>
+  <link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
 
   <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -135,7 +134,7 @@ $json = json_encode($arrayQ);
     const answerButtonsElement = document.getElementById('answer-buttons')
     const pointsDiv = document.getElementById('points')
 
-
+    let arrayAnswers = [];
     let shuffledQuestions, currentQuestionIndex, points, q;
 
     startButton.addEventListener('click', startGame)
@@ -163,7 +162,9 @@ $json = json_encode($arrayQ);
 
     function showQuestion(question) {
       questionElement.innerText = question.question
+      let arrayAnswers = [];
       question.answers.forEach(answer => {
+        arrayAnswers.push(1)
         const button = document.createElement('button')
         button.innerText = answer.answer
         button.classList.add('btn-transit')
@@ -175,6 +176,12 @@ $json = json_encode($arrayQ);
         button.addEventListener('click', selectAnswer)
         answerButtonsElement.appendChild(button)
       })
+      if (arrayAnswers.length == 0) {
+        const node = document.createElement("div");
+        const textnode = document.createTextNode("Zde není žádná odpověď, kvíz je potřeba opravit");
+        node.appendChild(textnode);
+        answerButtonsElement.appendChild(node);
+      }
     }
 
     function resetState() {
@@ -198,7 +205,7 @@ $json = json_encode($arrayQ);
       q += 1
       Array.from(answerButtonsElement.children).forEach(button => {
         setStatusClass(button, button.dataset.correct)
-        button.disabled=true;
+        button.disabled = true;
       })
       if (shuffledQuestions.length > currentQuestionIndex + 1) {
         nextButton.classList.remove('hide')

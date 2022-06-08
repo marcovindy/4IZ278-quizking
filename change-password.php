@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="description" content="Tohle je kvizova aplikace vytvorena pro VSE">
     <meta name="keywords" content="quiz, kviz, super, moc, husty, tagy">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,9 +41,6 @@
 
 
     <?php
-
-
-
     $result = "";
     if (!empty($_POST)) {
         $query = $db->query('SELECT * FROM users WHERE user_id="' . $_SESSION['user_id'] . '" LIMIT 1');
@@ -56,21 +53,26 @@
         foreach ($users as $user) {
             $user['user_pwd'] = $user['user_pwd'];
         }
-        if ($user['user_pwd'] != $oldPwd) {
-            $result = "Zadal jsi špatně staré heslo";
-        } else {
-            if ($newPwd != $oldPwd) {
-                if ($newPwd != $co) {
-                    $result = "Hesla nejsou stejná";
-                } else {
-                    $query = $db->prepare('UPDATE users SET user_pwd="' . $newPwd . '" WHERE user_id="' . $userId . '"');
-                    if ($query->execute()) {
-                        $result = "Heslo se povedlo změnit";
-                    }
-                }
+        $pattern = '/^(?=.*[0-9])(?=.*[A-Z]).{8,20}$/';
+        if ((preg_match($pattern, $newPwd))) {
+            if ($user['user_pwd'] != $oldPwd) {
+                $result = "Zadal jsi špatně staré heslo";
             } else {
-                $result = "Nové heslo nemůže být stejné, jako staré";
+                if ($newPwd != $oldPwd) {
+                    if ($newPwd != $co) {
+                        $result = "Hesla nejsou stejná";
+                    } else {
+                        $query = $db->prepare('UPDATE users SET user_pwd="' . $newPwd . '" WHERE user_id="' . $userId . '"');
+                        if ($query->execute()) {
+                            $result = "Heslo se povedlo změnit";
+                        }
+                    }
+                } else {
+                    $result = "Nové heslo nemůže být stejné, jako staré";
+                }
             }
+        } else {
+            $result = 'Heslo musí mít minimálně 1 číslici z minimálních 8 znaků.';
         }
     }
     ?>
@@ -100,7 +102,7 @@
 
                             <?php
                             if ($result != "") {
-                                echo "<h3>" . $result . "<h3>";
+                                echo "<div class='fs-3'>" . $result . "<div>";
                             }
                             ?>
 
