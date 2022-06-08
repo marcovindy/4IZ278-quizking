@@ -13,19 +13,19 @@ $checked = "";
 <?php
 if (!isset($_GET['categories'])) {
 
-    $query = $db->query("SELECT quizzes.* FROM quizzes ORDER BY quizzes.quiz_created DESC");
+    $query = $db->query("SELECT quizzes.* FROM quizzes WHERE quizzes.quiz_correct!=0 ORDER BY quizzes.quiz_created DESC");
     $quizzes = $query->fetchAll(PDO::FETCH_ASSOC);
 } elseif (isset($_GET['categories'])) {
     $query = 'SELECT
                            quizzes.* 
-                           FROM quizzes JOIN categories ON quizzes.quiz_category_id=categories.category_id WHERE ';
+                           FROM quizzes JOIN categories ON quizzes.quiz_category_id=categories.category_id WHERE quizzes.quiz_correct!=0 AND ( ';
     $names = $_GET['categories'];
     $temp = 0;
     for ($i = 0; $i < count($names) - 1; $i++) {
         $query .= 'categories.category_name="' . $names[$i] . '" OR ';
         $temp = $i + 1;
     }
-    $query .= 'categories.category_name="' . $names[$temp++] . '" ';
+    $query .= 'categories.category_name="' . $names[$temp++] . '") ';
     $query .= ' ORDER BY quizzes.quiz_created DESC;';
     $query = $db->query($query);
     $quizzes = $query->fetchAll(PDO::FETCH_ASSOC);

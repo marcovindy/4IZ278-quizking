@@ -2,7 +2,7 @@
 
 //načteme připojení k databázi
 require_once '../inc/db.php';
-
+$correct = 0;
 if (!empty($_POST)) {
     $quizId = $_POST['quiz_id'];
     $questionId = $_POST['question_id'];
@@ -16,6 +16,8 @@ if (!empty($_POST)) {
             ':answer' => $answer,
             ':answer_correct' => $answerCorrect
         ]);
+        $query = $db->prepare('UPDATE quizzes SET quiz_correct=0 WHERE quiz_id='.$_POST["quiz_id"].';');
+        $query->execute();
         echo "Odpověď úspěšně vytvořena.";
         header("refresh:2; url=../custom-edit.php?quiz_id=".$quizId);
         exit();
@@ -26,6 +28,6 @@ if (!empty($_POST)) {
     } 
 }else {
     echo "Nepovedlo se vytvořit odpověď.";
-    header("refresh:2; url=../custom-edit.php?quiz_id=".$quizId);
+    header("refresh:2; url=../custom-quiz.php?");
     exit();
 }

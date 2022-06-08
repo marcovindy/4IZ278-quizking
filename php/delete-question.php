@@ -11,6 +11,8 @@ if (!empty($_GET)) {
         ]);
         if (!empty($_GET['quiz_id'])) {
             $quizId = $_GET['quiz_id'];
+            $query = $db->prepare('UPDATE quizzes SET quiz_correct=0 WHERE quiz_id='.$_GET["quiz_id"].';');
+            $query->execute();
         }
     } else {
         $errors['question_id'] = 'Musíte vybrat kvíz.';

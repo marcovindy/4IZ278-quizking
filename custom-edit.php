@@ -2,7 +2,7 @@
 
 //načteme připojení k databázi
 require_once 'inc/db.php';
-
+$diabled = "";
 $errors = [];
 if (!empty($_POST)) {
     if (!empty($_POST['quiz_id'])) {
@@ -181,6 +181,12 @@ $questions = $query->fetchAll(PDO::FETCH_ASSOC);
                                     <?php endforeach; ?>
                                 <?php endif; ?>
                             <?php endforeach; ?>
+                            <div class="row">
+                            <?php if ($quiz['quiz_correct'] == 0) : ?>
+                                <a  href="php/publish.php?quiz_id=<?= $_POST['quiz_id'] ?>" class="publish-btn btn btn-transit">Zveřejnit kvíz</a>
+                                <?php endif; ?>
+                             
+                            </div>
                         <?php endif; ?>
 
                     </div>

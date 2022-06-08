@@ -13,6 +13,8 @@ if (!empty($_POST['quiz_id'])) {
             ':question_quiz_id' => $quizId,
             ':question_question' => $question
         ]);
+        $query = $db->prepare('UPDATE quizzes SET quiz_correct=0 WHERE quiz_id='.$_POST["quiz_id"].';');
+        $query->execute();
         echo "Otákza úspěšně vytvořena.";
         header("refresh:2; url=../custom-edit.php?quiz_id=".$quizId);
         exit();
