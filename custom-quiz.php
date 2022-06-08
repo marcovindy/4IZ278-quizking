@@ -4,8 +4,9 @@ require_once 'inc/db.php';
 
 $query = $db->prepare('SELECT * FROM categories;');
 $query->execute();
-
+$counter = 0;
 $categories = $query->fetchAll(PDO::FETCH_ASSOC);
+$numOfQ = 0;
 $numOfCat = 0;
 ?>
 
@@ -147,7 +148,8 @@ $numOfCat = 0;
                     <div class="col">
                         <?php if (!empty($quizzes)) : ?>
                             <?php foreach ($quizzes as $quiz) : array_map('htmlentities', $quiz); ?>
-                                <?php $numOfCat = count($quizzes); ?>
+                            <?php $numOfQ = count($quizzes); ?>
+                            <?php if ($quiz['quiz_user_id'] == $_SESSION['user_id']) : ?>
                                 <a href="quiz.php?quiz_id=<?= $quiz['quiz_id'] ?>">
                                     <div class="quiz p-3">
                                         <div class="row">
@@ -162,6 +164,7 @@ $numOfCat = 0;
                                             <div class="col-4  d-flex  flex-column justify-content-center">
                                                 <span class="m-0">
                                                     <?php
+                                                    $counter ++;
                                                     $date = $quiz['quiz_created'];
                                                     $date = new DateTime($date);
                                                     echo htmlspecialchars($date->format('d/m/Y'));
@@ -181,7 +184,11 @@ $numOfCat = 0;
                                         </div>
                                     </div>
                                 </a>
+                                <?php endif; ?>
                             <?php endforeach; ?>
+                            <?php if($counter == 0): ?>
+                                <div class="fs-3">Zde bohužel nejsou žádné kvízy</div>
+                                <?php endif; ?>
                         <?php endif; ?>
                         <?php if (empty($quizzes)) : ?>
                             <?php if ($user != -1) : ?>
