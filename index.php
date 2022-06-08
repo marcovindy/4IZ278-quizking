@@ -33,8 +33,6 @@ if (!isset($_GET['categories'])) {
 
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -81,7 +79,6 @@ if (!isset($_GET['categories'])) {
                         <?php if (!isset($_GET['categories'])) : ?>
                             <h1>Všechny Kvízy</h1>
                         <?php endif; ?>
-
                         <?php
                         if (isset($_GET['categories'])) {
                             $names = $_GET['categories'];
@@ -96,7 +93,6 @@ if (!isset($_GET['categories'])) {
                             echo $text;
                         }
                         ?>
-
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <div class="filter-box">
@@ -130,7 +126,6 @@ if (!isset($_GET['categories'])) {
                                     <a href="index.php" class="btn-transit2 btn" type="reset">Reset</a>
                                 </fieldset>
                             </form>
-
                         </div>
                     </div>
                 </div>
@@ -200,8 +195,5 @@ if (!isset($_GET['categories'])) {
         </div>
     </div>
     <?php require_once('inc/footer.php'); ?>
-
-
 </body>
-
 </html>
